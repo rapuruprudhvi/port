@@ -1,0 +1,389 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(
+        135deg,
+        #1eb6f0,
+        #6554ff
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* Back Home */
+
+.back-home{
+    position:absolute;
+    top:30px;
+    left:30px;
+    text-decoration:none;
+    color:#fff;
+    font-size:1rem;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:.3s;
+    z-index:100;
+}
+
+.back-home:hover{
+    color:#fff;
+    transform:translateX(-3px);
+}
+
+/* Tablet */
+@media (max-width: 992px){
+
+    .back-home{
+        top:20px;
+        left:20px;
+        font-size:0.95rem;
+    }
+
+}
+
+/* Mobile */
+@media (max-width: 768px){
+
+    .back-home{
+        position:static;
+        margin:20px;
+        display:inline-flex;
+    }
+
+}
+
+/* Small Mobile */
+@media (max-width: 480px){
+
+    .back-home{
+        font-size:0.9rem;
+        margin:15px;
+    }
+
+}
+@media (max-width: 768px){
+
+    body{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .back-home{
+        position:static;
+        margin:20px 0;
+        align-self:flex-start;
+        margin-left:20px;
+    }
+
+}
+
+/* Login Container */
+
+.login-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+/* Card */
+
+.login-card{
+
+    width:100%;
+    max-width:480px;
+
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(15px);
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 8px 30px rgba(0,0,0,.15);
+
+    text-align:center;
+}
+
+/* Logo */
+
+.logo-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.logo-wrapper img{
+    width:clamp(80px, 12vw, 120px);
+    height:auto;
+    max-width:100%;
+    object-fit:contain;
+    display:block;
+
+    border-radius:50%;
+    border:4px solid #7a00ff;
+
+    padding:4px;
+    background:#000;
+
+    transition:all .3s ease;
+}
+
+.logo-wrapper img:hover{
+    transform:scale(1.05);
+}
+.subtitle{
+    color:#f0f0f0;
+    margin-bottom:30px;
+    font-size:1.05rem;
+}
+
+/* Labels */
+
+.form-label{
+    color:#fff;
+    font-weight:500;
+    display:block;
+    text-align:left;
+    margin-bottom:8px;
+}
+
+/* Inputs */
+
+.custom-input{
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    height:55px;
+    font-size:1rem;
+}
+
+.custom-input:focus{
+    box-shadow:none;
+    border:none;
+}
+
+/* Password */
+
+.password-box{
+    position:relative;
+}
+
+.eye-icon{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#555;
+}
+
+/* Forgot */
+
+.forgot-link{
+    display:block;
+    text-align:left;
+    color:#fff;
+    text-decoration:none;
+    margin:12px 0 25px;
+    font-size:.95rem;
+}
+
+.forgot-link:hover{
+    text-decoration:underline;
+}
+
+/* Button */
+
+.login-btn{
+
+    width:100%;
+
+    border:none;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    background:linear-gradient(
+        90deg,
+        #355cff,
+        #b400ff
+    );
+
+    color:#fff;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.login-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* Signup */
+
+.signup-text{
+    color:#fff;
+    margin-top:25px;
+    margin-bottom:0;
+    font-size:1rem;
+}
+
+.signup-text a{
+    color:#fff;
+    font-weight:600;
+}
+
+.signup-text a:hover{
+    text-decoration:none;
+}
+
+/* Tablet */
+
+@media(max-width:768px){
+
+    .login-card{
+        max-width:450px;
+        padding:35px;
+    }
+
+    .login-card h1{
+        font-size:2rem;
+    }
+
+}
+
+/* Mobile */
+
+@media(max-width:576px){
+
+    .back-home{
+        top:20px;
+        left:20px;
+        font-size:.9rem;
+    }
+
+    .login-container{
+        padding:15px;
+    }
+
+    .login-card{
+        padding:25px;
+        border-radius:20px;
+    }
+
+    .logo-wrapper img{
+        width:80px;
+        height:80px;
+    }
+
+    .login-card h1{
+        font-size:1.8rem;
+    }
+
+    .subtitle{
+        font-size:.95rem;
+    }
+
+}
+
+/* Small Mobile */
+
+@media(max-width:400px){
+
+    .login-card{
+        padding:20px;
+    }
+
+    .login-card h1{
+        font-size:1.6rem;
+    }
+
+    .custom-input{
+        height:50px;
+    }
+
+}
+
+
+
+/*signup.css//
+
+.back-home{
+    position:fixed;
+    top:25px;
+    left:25px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    color:#fff;
+    text-decoration:none;
+    font-size:1rem;
+    font-weight:600;
+
+    z-index:1000;
+    transition:all .3s ease;
+}
+
+.back-home:hover{
+    color:#f8f9fa;
+    transform:translateX(-3px);
+}
+
+/* Tablet */
+@media (max-width: 992px){
+
+    .back-home{
+        top:20px;
+        left:20px;
+        font-size:0.95rem;
+    }
+
+}
+
+/* Mobile */
+@media (max-width: 768px){
+
+    .back-home{
+        position:absolute;
+        top:15px;
+        left:15px;
+        font-size:0.9rem;
+    }
+
+}
+
+/* Small Mobile */
+@media (max-width: 480px){
+
+    .back-home{
+        font-size:0.85rem;
+        gap:6px;
+    }
+
+}

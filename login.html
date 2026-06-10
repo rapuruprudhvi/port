@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <!-- Back Home -->
+    <a href="index.html" class="back-home">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Home
+    </a>
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <!-- Logo -->
+            <div class="logo-wrapper">
+                <img src="image/logo-stackly.webp" alt="Logo">
+            </div>
+
+            <!-- Heading -->
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Login to access your account</p>
+
+            <!-- Form -->
+            <form id="loginForm">
+
+                <div class="mb-3">
+                    <label class="form-label">Login As</label>
+
+                    <select class="form-select custom-input" id="userRole">
+
+                        <option>Student</option>
+                        <option>Developer</option>
+                        <option>Admin</option>
+
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email ID</label>
+
+                    <input
+                        type="email"
+                        class="form-control custom-input"
+                        id="email"
+                        placeholder="Enter your email"
+                        required>
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">Password</label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            class="form-control custom-input"
+                            id="password"
+                            placeholder="Enter Password"
+                            required>
+
+                        <i
+                            class="fa-solid fa-eye eye-icon"
+                            id="togglePassword"></i>
+
+                    </div>
+
+                </div>
+
+                <a href="#" class="forgot-link">
+                    Forgot password?
+                </a>
+
+                <button type="submit" class="login-btn">
+                    Login to Dashboard
+                </button>
+
+                <p class="signup-text">
+
+                    Don't have an account?
+
+                    <a href="signup.html">
+                        Sign up
+                    </a>
+
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

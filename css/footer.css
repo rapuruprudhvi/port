@@ -1,0 +1,443 @@
+/* =====================================================
+   STACKLY - FOOTER.CSS
+   Footer Styles Only
+===================================================== */
+
+/* =====================================================
+   FOOTER WRAPPER
+===================================================== */
+
+.footer-wrapper {
+
+    background: #060b17;
+
+    padding-top: 80px;
+
+    border-top: 1px solid rgba(255,255,255,.05);
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.footer-wrapper::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+
+    height: 350px;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+
+    opacity: .05;
+
+    filter: blur(120px);
+
+    top: -150px;
+
+    right: -150px;
+
+    pointer-events: none;
+
+}
+
+/* =====================================================
+   FOOTER GRID
+===================================================== */
+
+.footer-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.3fr
+        1fr
+        1fr
+        1fr;
+
+    gap: 50px;
+
+}
+
+/* =====================================================
+   FOOTER LOGO
+===================================================== */
+
+.logo-container {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: white;
+
+}
+
+.logo-img-wrapper {
+
+    width: 48px;
+
+    height: 48px;
+
+}
+
+.logo-img-wrapper img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+}
+
+.logo-text {
+
+    color: white;
+
+    font-size: 1.2rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+.footer-brand-desc {
+
+    color: var(--muted);
+
+    margin-top: 20px;
+
+    line-height: 1.8;
+
+    max-width: 350px;
+
+}
+
+/* =====================================================
+   SOCIAL ICONS
+===================================================== */
+
+.footer-social {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+    flex-wrap: wrap;
+
+}
+
+.footer-social-link {
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(255,255,255,.05);
+
+    color: white;
+
+    transition: var(--transition);
+
+}
+
+.footer-social-link:hover {
+
+    background: var(--primary);
+
+    color: white;
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 25px rgba(37,99,235,.25);
+
+}
+
+/* =====================================================
+   FOOTER HEADING
+===================================================== */
+
+.footer-heading {
+
+    display: block;
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    margin-bottom: 1.5rem;
+
+}
+
+/* =====================================================
+   FOOTER LINKS
+===================================================== */
+
+.footer-link {
+
+    display: block;
+
+    color: var(--muted);
+
+    margin-bottom: 12px;
+
+    transition: var(--transition);
+
+}
+
+.footer-link:hover {
+
+    color: white;
+
+    transform: translateX(6px);
+
+}
+
+/* =====================================================
+   CONTACT ITEMS
+===================================================== */
+
+.footer-contact-item {
+
+    display: block;
+
+    color: var(--muted);
+
+    margin-bottom: 12px;
+
+    transition: var(--transition);
+
+}
+
+.footer-contact-item:hover {
+
+    color: white;
+
+    transform: translateX(6px);
+
+}
+
+/* =====================================================
+   ECOSYSTEM
+===================================================== */
+
+.ecosystem-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 14px 18px;
+
+    margin-bottom: 12px;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.03);
+
+    color: var(--muted);
+
+    transition: var(--transition);
+
+}
+
+.ecosystem-item:hover {
+
+    background: rgba(37,99,235,.12);
+
+    color: white;
+
+    transform: translateX(6px);
+
+}
+
+.ecosystem-item i {
+
+    color: var(--primary);
+
+}
+
+.ecosystem-name {
+
+    font-weight: 500;
+
+}
+
+.ecosystem-num {
+
+    color: var(--primary);
+
+    margin-right: 10px;
+
+    font-weight: 700;
+
+}
+
+/* =====================================================
+   FOOTER BOTTOM
+===================================================== */
+
+.footer-bottom {
+
+    margin-top: 60px;
+
+    padding: 30px 0;
+
+    border-top: 1px solid rgba(255,255,255,.06);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+}
+
+/* =====================================================
+   FOOTER LEGAL
+===================================================== */
+
+.footer-legal {
+
+    display: flex;
+
+    gap: 25px;
+
+    flex-wrap: wrap;
+
+}
+
+.footer-legal a {
+
+    color: var(--muted);
+
+    transition: var(--transition);
+
+}
+
+.footer-legal a:hover {
+
+    color: white;
+
+}
+
+/* =====================================================
+   COPYRIGHT
+===================================================== */
+
+.footer-copyright {
+
+    color: var(--muted);
+
+    margin: 0;
+
+}
+
+/* =====================================================
+   FOOTER ANIMATIONS
+===================================================== */
+
+.footer-link,
+.footer-contact-item,
+.footer-social-link,
+.ecosystem-item {
+
+    transition: all .3s ease;
+
+}
+
+/* =====================================================
+   RESPONSIVE FOOTER
+===================================================== */
+
+@media (max-width: 992px) {
+
+    .footer-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap: 40px;
+
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .footer-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .footer-bottom {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+    .footer-legal {
+
+        justify-content: center;
+
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .footer-social {
+
+        justify-content: center;
+
+    }
+
+    .logo-container {
+
+        justify-content: center;
+
+    }
+
+    .footer-brand-desc {
+
+        text-align: center;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+}

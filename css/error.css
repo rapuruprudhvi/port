@@ -1,0 +1,343 @@
+/* =====================================================
+   STACKLY - ERROR.CSS
+   404 PAGE STYLES
+===================================================== */
+
+/* =====================================================
+   ERROR SECTION
+===================================================== */
+
+.error-section {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding-top: 120px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.05),
+            rgba(59,130,246,.02)
+        );
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.error-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+
+    opacity: .08;
+
+    filter: blur(180px);
+
+    top: -200px;
+
+    right: -150px;
+
+}
+
+/* =====================================================
+   ERROR CONTENT
+===================================================== */
+
+.error-content {
+
+    max-width: 750px;
+
+    margin: auto;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+.error-number {
+
+    font-size: 10rem;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    color: var(--primary);
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 10px 40px rgba(37,99,235,.25);
+
+    animation: float404 4s ease-in-out infinite;
+
+}
+
+.error-content h1 {
+
+    color: white;
+
+    font-size: 3rem;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+
+}
+
+.error-content p {
+
+    color: var(--muted);
+
+    font-size: 1.1rem;
+
+    max-width: 600px;
+
+    margin: 0 auto 40px;
+
+}
+
+/* =====================================================
+   ERROR ICON
+===================================================== */
+
+.error-icon {
+
+    margin-bottom: 25px;
+
+}
+
+.error-icon i {
+
+    font-size: 4rem;
+
+    color: var(--primary);
+
+    animation: rocketFloat 3s ease-in-out infinite;
+
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.error-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+}
+
+.error-buttons .btn {
+
+    padding: 14px 30px;
+
+    border-radius: 12px;
+
+}
+
+/* =====================================================
+   MINI CTA
+===================================================== */
+
+.error-cta-section {
+
+    background: var(--bg-light);
+
+}
+
+.error-cta-section .cta-box {
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.15),
+            rgba(59,130,246,.05)
+        );
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 30px;
+
+    padding: 70px 40px;
+
+}
+
+.error-cta-section .cta-box h2 {
+
+    color: white;
+
+    font-size: 2.5rem;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+
+}
+
+.error-cta-section .cta-box p {
+
+    color: var(--muted);
+
+    max-width: 700px;
+
+    margin: auto auto 30px;
+
+}
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes float404 {
+
+    0% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-15px);
+
+    }
+
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+}
+
+@keyframes rocketFloat {
+
+    0% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-10px);
+
+    }
+
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 992px) {
+
+    .error-number {
+
+        font-size: 8rem;
+
+    }
+
+    .error-content h1 {
+
+        font-size: 2.5rem;
+
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .error-number {
+
+        font-size: 6rem;
+
+    }
+
+    .error-content h1 {
+
+        font-size: 2rem;
+
+    }
+
+    .error-content p {
+
+        font-size: 1rem;
+
+    }
+
+    .error-cta-section .cta-box {
+
+        padding: 50px 25px;
+
+    }
+
+    .error-cta-section .cta-box h2 {
+
+        font-size: 2rem;
+
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .error-number {
+
+        font-size: 5rem;
+
+    }
+
+    .error-icon i {
+
+        font-size: 3rem;
+
+    }
+
+    .error-buttons {
+
+        flex-direction: column;
+
+    }
+
+    .error-buttons .btn {
+
+        width: 100%;
+
+    }
+
+}

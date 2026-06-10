@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Premium Admin Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div id="overlay" class="overlay"></div>
+<aside class="sidebar">
+<div class="brand"><h3>STACKLY</h3><span>Admin Portal</span></div>
+<ul>
+<li><a href="#" onclick="showSection('dashboard')"><i class="fa fa-chart-line"></i> Dashboard</a></li>
+<li><a href="#" onclick="showSection('users')"><i class="fa fa-users"></i> Users</a></li>
+<li><a href="#" onclick="showSection('projects')"><i class="fa fa-building"></i> Projects</a></li>
+<li><a href="#" onclick="showSection('analytics')"><i class="fa fa-chart-pie"></i> Analytics</a></li>
+<li><a href="#" onclick="showSection('profile')"><i class="fa fa-user"></i> Profile</a></li>
+<li><a href="#" onclick="showSection('settings')"><i class="fa fa-gear"></i> Settings</a></li>
+<li><a href="#" id="logoutBtn"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+</ul>
+</aside>
+
+<main class="main-content">
+<nav class="topbar">
+<button id="menuToggle" class="menu-btn"><i class="fa fa-bars"></i></button>
+<input type="text" placeholder="Search users, projects..." class="search-box">
+<div class="actions">
+<i id="notificationBtn" class="fa fa-bell"></i>
+<button id="darkModeToggle" class="dark-btn"><i class="bi bi-moon-fill"></i></button>
+<img src="https://i.pravatar.cc/60?img=12">
+</div>
+</nav>
+
+<!-- Notification Panel -->
+<div id="notificationPanel" class="notification-panel">
+<div class="notification-header">
+<h4>Notifications</h4>
+<button id="closeNotification"><i class="fa fa-times"></i></button>
+</div>
+<div class="notification-list">
+<div class="notification-item">
+<i class="fa fa-user-plus"></i>
+<div>
+<strong>New User Registration</strong>
+<p>Sarah Johnson registered 5 minutes ago</p>
+</div>
+</div>
+<div class="notification-item">
+<i class="fa fa-check-circle"></i>
+<div>
+<strong>Project Completed</strong>
+<p>Luxury Villa project marked as complete</p>
+</div>
+</div>
+<div class="notification-item">
+<i class="fa fa-exclamation-triangle"></i>
+<div>
+<strong>System Alert</strong>
+<p>Database backup is scheduled for tonight</p>
+</div>
+</div>
+<div class="notification-item">
+<i class="fa fa-comments"></i>
+<div>
+<strong>New Message</strong>
+<p>You have 3 unread messages</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Dashboard View -->
+<div id="dashboard-view" class="content-view" style="display: block;">
+<section class="hero">
+<h1>Admin Dashboard</h1>
+<p>Overview of system performance and platform activity.</p>
+</section>
+
+<section class="stats">
+<div class="card"><h2>1,284</h2><p>Total Users</p></div>
+<div class="card"><h2>42</h2><p>Projects</p></div>
+<div class="card"><h2>98%</h2><p>System Health</p></div>
+<div class="card"><h2>15</h2><p>Alerts</p></div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Analytics</h3>
+<canvas id="chart"></canvas>
+</div>
+
+<div class="panel">
+<h3>Quick Actions</h3>
+<div class="quick">
+<button>Add User</button>
+<button>New Project</button>
+<button>Export</button>
+<button>Reports</button>
+</div>
+</div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Recent Activity</h3>
+<ul class="activity">
+<li>User registered</li>
+<li>Project updated</li>
+<li>Backup completed</li>
+<li>Server optimized</li>
+</ul>
+</div>
+</div>
+
+<!-- Users View -->
+<div id="users-view" class="content-view" style="display: none;">
+<section class="hero">
+<h1>User Management</h1>
+<p>Manage all users, roles, and permissions.</p>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>All Users</h3>
+<table>
+<tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr>
+<tr><td>Vivek Kumar</td><td>vivek@stackly.com</td><td>Admin</td><td>Active</td><td><button>Edit</button></td></tr>
+<tr><td>Rahul Sharma</td><td>rahul@stackly.com</td><td>User</td><td>Pending</td><td><button>Edit</button></td></tr>
+<tr><td>John Doe</td><td>john@stackly.com</td><td>Manager</td><td>Active</td><td><button>Edit</button></td></tr>
+<tr><td>Sarah Johnson</td><td>sarah@stackly.com</td><td>User</td><td>Active</td><td><button>Edit</button></td></tr>
+<tr><td>Mike Wilson</td><td>mike@stackly.com</td><td>Developer</td><td>Active</td><td><button>Edit</button></td></tr>
+</table>
+</div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Add New User</h3>
+<form>
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email Address" required>
+<select required>
+<option value="">Select Role</option>
+<option>Admin</option>
+<option>Manager</option>
+<option>Developer</option>
+<option>User</option>
+</select>
+<button type="submit">Add User</button>
+</form>
+</div>
+
+<div class="panel">
+<h3>User Statistics</h3>
+<div class="stats">
+<div class="card"><h2>1,284</h2><p>Total Users</p></div>
+<div class="card"><h2>342</h2><p>Active Today</p></div>
+<div class="card"><h2>15</h2><p>Pending</p></div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Projects View -->
+<div id="projects-view" class="content-view" style="display: none;">
+<section class="hero">
+<h1>Projects</h1>
+<p>Manage all projects and their status.</p>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Active Projects</h3>
+<table>
+<tr><th>Project Name</th><th>Client</th><th>Status</th><th>Progress</th><th>Deadline</th></tr>
+<tr><td>E-commerce Platform</td><td>TechCorp</td><td>In Progress</td><td>75%</td><td>Dec 30, 2026</td></tr>
+<tr><td>Mobile Banking App</td><td>FinanceHub</td><td>In Progress</td><td>60%</td><td>Jan 15, 2027</td></tr>
+<tr><td>Luxury Villa Website</td><td>RealEstate Pro</td><td>Completed</td><td>100%</td><td>Nov 20, 2026</td></tr>
+<tr><td>Corporate Tower Site</td><td>BuildCo</td><td>In Progress</td><td>40%</td><td>Feb 10, 2027</td></tr>
+<tr><td>Healthcare Portal</td><td>MediLife</td><td>Planning</td><td>10%</td><td>Mar 05, 2027</td></tr>
+</table>
+</div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Project Statistics</h3>
+<div class="stats">
+<div class="card"><h2>42</h2><p>Total Projects</p></div>
+<div class="card"><h2>28</h2><p>Active</p></div>
+<div class="card"><h2>12</h2><p>Completed</p></div>
+<div class="card"><h2>2</h2><p>On Hold</p></div>
+</div>
+</div>
+
+<div class="panel">
+<h3>Create New Project</h3>
+<form>
+<input type="text" placeholder="Project Name" required>
+<input type="text" placeholder="Client Name" required>
+<input type="date" placeholder="Deadline" required>
+<button type="submit">Create Project</button>
+</form>
+</div>
+</section>
+</div>
+
+<!-- Analytics View -->
+<div id="analytics-view" class="content-view" style="display: none;">
+<section class="hero">
+<h1>Analytics</h1>
+<p>Detailed insights and performance metrics.</p>
+</section>
+
+<section class="stats">
+<div class="card"><h2>45,231</h2><p>Page Views</p></div>
+<div class="card"><h2>12,842</h2><p>Unique Visitors</p></div>
+<div class="card"><h2>3.2min</h2><p>Avg. Session</p></div>
+<div class="card"><h2>68%</h2><p>Bounce Rate</p></div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Traffic Analytics</h3>
+<canvas id="trafficChart"></canvas>
+</div>
+
+<div class="panel">
+<h3>User Engagement</h3>
+<canvas id="engagementChart"></canvas>
+</div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Top Pages</h3>
+<table>
+<tr><th>Page</th><th>Views</th><th>Avg. Time</th></tr>
+<tr><td>/dashboard</td><td>12,340</td><td>4.2min</td></tr>
+<tr><td>/projects</td><td>8,921</td><td>3.5min</td></tr>
+<tr><td>/users</td><td>6,542</td><td>2.8min</td></tr>
+</table>
+</div>
+
+<div class="panel">
+<h3>Performance Metrics</h3>
+<ul class="activity">
+<li>Server Response Time: 120ms</li>
+<li>API Success Rate: 99.8%</li>
+<li>Database Queries: 2.3s avg</li>
+<li>Cache Hit Rate: 94%</li>
+</ul>
+</div>
+</section>
+</div>
+
+<!-- Profile View -->
+<div id="profile-view" class="content-view" style="display: none;">
+<section class="hero">
+<h1>Admin Profile</h1>
+<p>Manage your account settings and preferences.</p>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Personal Information</h3>
+<form>
+<label>Full Name</label>
+<input type="text" value="Vivek Kumar" required>
+<label>Email Address</label>
+<input type="email" value="vivek@stackly.com" required>
+<label>Phone Number</label>
+<input type="tel" value="+91 9108765432" required>
+<label>Position</label>
+<input type="text" value="System Administrator" required>
+<button type="submit">Update Profile</button>
+</form>
+</div>
+
+<div class="panel">
+<h3>Profile Picture</h3>
+<div style="text-align: center; padding: 2rem;">
+<img src="https://i.pravatar.cc/150?img=12" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 1rem;">
+<br>
+<button>Change Picture</button>
+</div>
+</div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Change Password</h3>
+<form>
+<label>Current Password</label>
+<input type="password" required>
+<label>New Password</label>
+<input type="password" required>
+<label>Confirm New Password</label>
+<input type="password" required>
+<button type="submit">Update Password</button>
+</form>
+</div>
+
+<div class="panel">
+<h3>Account Activity</h3>
+<ul class="activity">
+<li>Last Login: Today at 9:30 AM</li>
+<li>Password Changed: 2 weeks ago</li>
+<li>Profile Updated: 1 month ago</li>
+<li>Account Created: Jan 15, 2025</li>
+</ul>
+</div>
+</section>
+</div>
+
+<!-- Settings View -->
+<div id="settings-view" class="content-view" style="display: none;">
+<section class="hero">
+<h1>Settings</h1>
+<p>Configure system preferences and options.</p>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>General Settings</h3>
+<form>
+<label>Site Name</label>
+<input type="text" value="Stackly Admin Portal" required>
+<label>Site URL</label>
+<input type="url" value="https://admin.stackly.com" required>
+<label>Admin Email</label>
+<input type="email" value="admin@stackly.com" required>
+<label>Timezone</label>
+<select required>
+<option>UTC +5:30 (IST)</option>
+<option>UTC +0:00 (GMT)</option>
+<option>UTC -5:00 (EST)</option>
+</select>
+<button type="submit">Save Settings</button>
+</form>
+</div>
+
+<div class="panel">
+<h3>Notification Settings</h3>
+<div style="padding: 1rem;">
+<label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+<input type="checkbox" checked>
+<span>Email Notifications</span>
+</label>
+<label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+<input type="checkbox" checked>
+<span>SMS Alerts</span>
+</label>
+<label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+<input type="checkbox">
+<span>Push Notifications</span>
+</label>
+<label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+<input type="checkbox" checked>
+<span>Weekly Reports</span>
+</label>
+<button>Update Preferences</button>
+</div>
+</div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h3>Security Settings</h3>
+<form>
+<label>Two-Factor Authentication</label>
+<select required>
+<option>Enabled</option>
+<option>Disabled</option>
+</select>
+<label>Session Timeout (minutes)</label>
+<input type="number" value="30" required>
+<label>Allowed IP Addresses</label>
+<textarea rows="3" placeholder="Enter IP addresses, one per line"></textarea>
+<button type="submit">Update Security</button>
+</form>
+</div>
+
+<div class="panel">
+<h3>Backup & Maintenance</h3>
+<div style="padding: 1rem;">
+<p><strong>Last Backup:</strong> Today at 2:00 AM</p>
+<p><strong>Next Scheduled:</strong> Tomorrow at 2:00 AM</p>
+<p><strong>Backup Location:</strong> Cloud Storage</p>
+<button style="margin-top: 1rem;">Run Backup Now</button>
+<button style="margin-top: 0.5rem;">View Backup History</button>
+</div>
+</div>
+</section>
+</div>
+
+</main>
+<script src="js/dashboard.js"></script>
+<script>
+// Initialize Charts for Admin Dashboard
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Main Dashboard Chart
+    const chartCanvas = document.getElementById('chart');
+    if (chartCanvas) {
+        new Chart(chartCanvas, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Users',
+                    data: [120, 180, 250, 220, 390, 450, 520],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+    }
+
+    // Traffic Analytics Chart
+    const trafficChart = document.getElementById('trafficChart');
+    if (trafficChart) {
+        new Chart(trafficChart, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Page Views',
+                    data: [4523, 5231, 6842, 5932, 7234, 4321, 3892],
+                    backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+    }
+
+    // Engagement Chart
+    const engagementChart = document.getElementById('engagementChart');
+    if (engagementChart) {
+        new Chart(engagementChart, {
+            type: 'doughnut',
+            data: {
+                labels: ['Desktop', 'Mobile', 'Tablet'],
+                datasets: [{
+                    data: [45, 35, 20],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(118, 75, 162, 0.8)',
+                        'rgba(237, 100, 166, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Stackly</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+            <img src="image/logo-stackly.webp" alt="Stackly Logo" class="sidebar-logo">
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li class="menu-item active">
+                <a href="#dashboard">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="#courses">
+                    <i class="bi bi-book"></i>
+                    <span>My Courses</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="#assignments">
+                    <i class="bi bi-clipboard-check"></i>
+                    <span>Assignments</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="#grades">
+                    <i class="bi bi-graph-up"></i>
+                    <span>Grades</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="#schedule">
+                    <i class="bi bi-calendar3"></i>
+                    <span>Schedule</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="#resources">
+                    <i class="bi bi-folder"></i>
+                    <span>Resources</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="#profile">
+                    <i class="bi bi-person"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="#settings">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="sidebar-footer">
+            <a href="login.html" class="logout-btn">
+                <i class="bi bi-box-arrow-left"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- =========================
+         OVERLAY
+    ========================== -->
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <div class="main-content">
+
+        <!-- =========================
+             TOP NAVBAR
+        ========================== -->
+
+        <nav class="top-navbar">
+
+            <div class="navbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h4 class="page-title">Student Dashboard</h4>
+            </div>
+
+            <div class="navbar-right">
+
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search courses, assignments...">
+                </div>
+
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+
+                <button class="dark-mode-toggle" id="darkModeToggle">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Student+User&background=2563eb&color=fff"
+                         alt="Profile">
+                    <div class="user-info">
+                        <span class="user-name">Student User</span>
+                        <span class="user-role">Student</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </nav>
+
+        <!-- =========================
+             NOTIFICATION PANEL
+        ========================== -->
+
+        <div class="notification-panel" id="notificationPanel">
+
+            <div class="notification-header">
+                <h5>Notifications</h5>
+                <button class="close-btn" id="closeNotification">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+
+            <div class="notification-list">
+
+                <div class="notification-item unread">
+                    <div class="notification-icon">
+                        <i class="bi bi-clipboard-check"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p><strong>New Assignment:</strong> Web Development Project</p>
+                        <span class="notification-time">10 minutes ago</span>
+                    </div>
+                </div>
+
+                <div class="notification-item unread">
+                    <div class="notification-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p><strong>Grade Posted:</strong> Data Structures Quiz</p>
+                        <span class="notification-time">2 hours ago</span>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="bi bi-megaphone"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p><strong>Announcement:</strong> Holiday Schedule</p>
+                        <span class="notification-time">1 day ago</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             DASHBOARD CONTENT
+        ========================== -->
+
+        <div class="content-view" id="dashboard-view">
+
+        <div class="dashboard-content">
+
+            <!-- Welcome Section -->
+
+            <div class="welcome-section">
+                <div>
+                    <h2>Welcome Back, Student! 👋</h2>
+                    <p>Here's what's happening with your courses today</p>
+                </div>
+                <div class="welcome-date">
+                    <i class="bi bi-calendar3"></i>
+                    <span id="currentDate"></span>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(37,99,235,.15);">
+                        <i class="bi bi-book" style="color: var(--primary);"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>6</h3>
+                        <p>Active Courses</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(245,158,11,.15);">
+                        <i class="bi bi-clipboard-check" style="color: #f59e0b;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>8</h3>
+                        <p>Pending Assignments</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(34,197,94,.15);">
+                        <i class="bi bi-graph-up" style="color: #22c55e;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>85%</h3>
+                        <p>Average Grade</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(168,85,247,.15);">
+                        <i class="bi bi-trophy" style="color: #a855f7;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>12</h3>
+                        <p>Completed Tasks</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Main Grid -->
+
+            <div class="dashboard-grid">
+
+                <!-- Enrolled Courses -->
+
+                <div class="dashboard-card courses-card">
+
+                    <div class="card-header">
+                        <h5>
+                            <i class="bi bi-book"></i>
+                            My Courses
+                        </h5>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+
+                    <div class="courses-list">
+
+                        <div class="course-item">
+                            <div class="course-color" style="background: #2563eb;"></div>
+                            <div class="course-info">
+                                <h6>Web Development</h6>
+                                <p>Prof. John Smith</p>
+                                <div class="course-progress">
+                                    <div class="progress-bar" style="width: 75%;"></div>
+                                </div>
+                                <span class="progress-text">75% Complete</span>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-color" style="background: #f59e0b;"></div>
+                            <div class="course-info">
+                                <h6>Data Structures</h6>
+                                <p>Prof. Sarah Johnson</p>
+                                <div class="course-progress">
+                                    <div class="progress-bar" style="width: 60%;"></div>
+                                </div>
+                                <span class="progress-text">60% Complete</span>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-color" style="background: #22c55e;"></div>
+                            <div class="course-info">
+                                <h6>Database Management</h6>
+                                <p>Prof. Michael Brown</p>
+                                <div class="course-progress">
+                                    <div class="progress-bar" style="width: 85%;"></div>
+                                </div>
+                                <span class="progress-text">85% Complete</span>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-color" style="background: #a855f7;"></div>
+                            <div class="course-info">
+                                <h6>Mobile App Development</h6>
+                                <p>Prof. Emily Davis</p>
+                                <div class="course-progress">
+                                    <div class="progress-bar" style="width: 45%;"></div>
+                                </div>
+                                <span class="progress-text">45% Complete</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Upcoming Assignments -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+                        <h5>
+                            <i class="bi bi-clipboard-check"></i>
+                            Upcoming Assignments
+                        </h5>
+                    </div>
+
+                    <div class="assignments-list">
+
+                        <div class="assignment-item">
+                            <div class="assignment-icon urgent">
+                                <i class="bi bi-exclamation-circle"></i>
+                            </div>
+                            <div class="assignment-info">
+                                <h6>Web Development Project</h6>
+                                <p>Create a responsive portfolio website</p>
+                                <span class="due-date urgent">Due: Tomorrow</span>
+                            </div>
+                        </div>
+
+                        <div class="assignment-item">
+                            <div class="assignment-icon warning">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div class="assignment-info">
+                                <h6>Database Design Assignment</h6>
+                                <p>Design ER diagram for e-commerce</p>
+                                <span class="due-date warning">Due: In 3 days</span>
+                            </div>
+                        </div>
+
+                        <div class="assignment-item">
+                            <div class="assignment-icon normal">
+                                <i class="bi bi-check-circle"></i>
+                            </div>
+                            <div class="assignment-info">
+                                <h6>Data Structures Quiz</h6>
+                                <p>Trees and graphs concepts</p>
+                                <span class="due-date normal">Due: Next week</span>
+                            </div>
+                        </div>
+
+                        <div class="assignment-item">
+                            <div class="assignment-icon normal">
+                                <i class="bi bi-file-text"></i>
+                            </div>
+                            <div class="assignment-info">
+                                <h6>Mobile App Wireframes</h6>
+                                <p>Design app mockups in Figma</p>
+                                <span class="due-date normal">Due: Next week</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Recent Grades -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+                        <h5>
+                            <i class="bi bi-graph-up"></i>
+                            Recent Grades
+                        </h5>
+                    </div>
+
+                    <div class="grades-list">
+
+                        <div class="grade-item">
+                            <div class="grade-subject">
+                                <i class="bi bi-code-slash"></i>
+                                <div>
+                                    <h6>Web Development</h6>
+                                    <p>Project Submission</p>
+                                </div>
+                            </div>
+                            <div class="grade-score excellent">A+</div>
+                        </div>
+
+                        <div class="grade-item">
+                            <div class="grade-subject">
+                                <i class="bi bi-diagram-3"></i>
+                                <div>
+                                    <h6>Data Structures</h6>
+                                    <p>Midterm Exam</p>
+                                </div>
+                            </div>
+                            <div class="grade-score good">B+</div>
+                        </div>
+
+                        <div class="grade-item">
+                            <div class="grade-subject">
+                                <i class="bi bi-database"></i>
+                                <div>
+                                    <h6>Database Management</h6>
+                                    <p>SQL Assignment</p>
+                                </div>
+                            </div>
+                            <div class="grade-score excellent">A</div>
+                        </div>
+
+                        <div class="grade-item">
+                            <div class="grade-subject">
+                                <i class="bi bi-phone"></i>
+                                <div>
+                                    <h6>Mobile Development</h6>
+                                    <p>UI Design Quiz</p>
+                                </div>
+                            </div>
+                            <div class="grade-score good">B</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Progress Chart -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+                        <h5>
+                            <i class="bi bi-bar-chart"></i>
+                            Academic Progress
+                        </h5>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+
+                </div>
+
+                <!-- Schedule -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+                        <h5>
+                            <i class="bi bi-calendar3"></i>
+                            Today's Schedule
+                        </h5>
+                    </div>
+
+                    <div class="schedule-list">
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">
+                                <span>9:00 AM</span>
+                            </div>
+                            <div class="schedule-info">
+                                <h6>Web Development</h6>
+                                <p>
+                                    <i class="bi bi-geo-alt"></i>
+                                    Room 301
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">
+                                <span>11:00 AM</span>
+                            </div>
+                            <div class="schedule-info">
+                                <h6>Data Structures</h6>
+                                <p>
+                                    <i class="bi bi-geo-alt"></i>
+                                    Room 205
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">
+                                <span>2:00 PM</span>
+                            </div>
+                            <div class="schedule-info">
+                                <h6>Database Management</h6>
+                                <p>
+                                    <i class="bi bi-geo-alt"></i>
+                                    Lab 102
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">
+                                <span>4:00 PM</span>
+                            </div>
+                            <div class="schedule-info">
+                                <h6>Mobile App Development</h6>
+                                <p>
+                                    <i class="bi bi-geo-alt"></i>
+                                    Room 410
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Announcements -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+                        <h5>
+                            <i class="bi bi-megaphone"></i>
+                            Announcements
+                        </h5>
+                    </div>
+
+                    <div class="announcements-list">
+
+                        <div class="announcement-item">
+                            <div class="announcement-icon">
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="announcement-content">
+                                <h6>Semester Break Notice</h6>
+                                <p>Classes will resume on January 20, 2026</p>
+                                <span class="announcement-date">Posted 2 days ago</span>
+                            </div>
+                        </div>
+
+                        <div class="announcement-item">
+                            <div class="announcement-icon">
+                                <i class="bi bi-calendar-event"></i>
+                            </div>
+                            <div class="announcement-content">
+                                <h6>Final Exam Schedule Released</h6>
+                                <p>Check your email for detailed schedule</p>
+                                <span class="announcement-date">Posted 5 days ago</span>
+                            </div>
+                        </div>
+
+                        <div class="announcement-item">
+                            <div class="announcement-icon">
+                                <i class="bi bi-trophy"></i>
+                            </div>
+                            <div class="announcement-content">
+                                <h6>Coding Competition</h6>
+                                <p>Register now for the annual hackathon</p>
+                                <span class="announcement-date">Posted 1 week ago</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+        <!-- =========================
+             MY COURSES VIEW
+        ========================== -->
+
+        <div class="content-view" id="courses-view" style="display: none;">
+
+            <div class="section-header">
+                <h2>My Courses</h2>
+                <p>Manage and track all your enrolled courses</p>
+            </div>
+
+            <div class="courses-grid">
+
+                <div class="course-detail-card">
+                    <div class="course-banner" style="background: linear-gradient(135deg, #2563eb, #3b82f6);">
+                        <h3>Web Development</h3>
+                        <p>Prof. John Smith</p>
+                    </div>
+                    <div class="course-details">
+                        <div class="course-stat">
+                            <span>Progress</span>
+                            <strong>75%</strong>
+                        </div>
+                        <div class="course-stat">
+                            <span>Grade</span>
+                            <strong>A+</strong>
+                        </div>
+                        <div class="course-stat">
+                            <span>Assignments</span>
+                            <strong>12/15</strong>
+                        </div>
+                    </div>
+                    <button class="btn-primary">View Course</button>
+                </div>
+
+                <div class="course-detail-card">
+                    <div class="course-banner" style="background: linear-gradient(135deg, #f59e0b, #fb923c);">
+                        <h3>Data Structures</h3>
+                        <p>Prof. Sarah Johnson</p>
+                    </div>
+                    <div class="course-details">
+                        <div class="course-stat">
+                            <span>Progress</span>
+                            <strong>60%</strong>
+                        </div>
+                        <div class="course-stat">
+                            <span>Grade</span>
+                            <strong>B+</strong>
+                        </div>
+                        <div class="course-stat">
+                            <span>Assignments</span>
+                            <strong>10/15</strong>
+                        </div>
+                    </div>
+                    <button class="btn-primary">View Course</button>
+                </div>
+
+                <div class="course-detail-card">
+                    <div class="course-banner" style="background: linear-gradient(135deg, #22c55e, #4ade80);">
+                        <h3>Database Management</h3>
+                        <p>Prof. Michael Brown</p>
+                    </div>
+                    <div class="course-details">
+                        <div class="course-stat">
+                            <span>Progress</span>
+                            <strong>85%</strong>
+                        </div>
+                        <div class="course-stat">
+                            <span>Grade</span>
+                            <strong>A</strong>
+                        </div>
+                        <div class="course-stat">
+                            <span>Assignments</span>
+                            <strong>14/15</strong>
+                        </div>
+                    </div>
+                    <button class="btn-primary">View Course</button>
+                </div>
+
+                <div class="course-detail-card">
+                    <div class="course-banner" style="background: linear-gradient(135deg, #a855f7, #c084fc);">
+                        <h3>Mobile App Development</h3>
+                        <p>Prof. Emily Davis</p>
+                    </div>
+                    <div class="course-details">
+                        <div class="course-stat">
+                            <span>Progress</span>
+                            <strong>45%</strong>
+                        </div>
+                        <div class="course-stat">
+                            <span>Grade</span>
+                            <strong>B</strong>
+                        </div>
+                        <div class="course-stat">
+                            <span>Assignments</span>
+                            <strong>8/15</strong>
+                        </div>
+                    </div>
+                    <button class="btn-primary">View Course</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             ASSIGNMENTS VIEW
+        ========================== -->
+
+        <div class="content-view" id="assignments-view" style="display: none;">
+
+            <div class="section-header">
+                <h2>Assignments</h2>
+                <p>Track and submit your assignments</p>
+            </div>
+
+            <div class="assignments-grid">
+
+                <div class="assignment-card urgent-card">
+                    <div class="assignment-header">
+                        <div>
+                            <h4>Web Development Project</h4>
+                            <p>Create a responsive portfolio website</p>
+                        </div>
+                        <span class="status-badge urgent">Due Tomorrow</span>
+                    </div>
+                    <div class="assignment-meta">
+                        <span><i class="bi bi-book"></i> Web Development</span>
+                        <span><i class="bi bi-person"></i> Prof. John Smith</span>
+                    </div>
+                    <button class="btn-primary">Submit Assignment</button>
+                </div>
+
+                <div class="assignment-card warning-card">
+                    <div class="assignment-header">
+                        <div>
+                            <h4>Database Design Assignment</h4>
+                            <p>Design ER diagram for e-commerce system</p>
+                        </div>
+                        <span class="status-badge warning">Due in 3 days</span>
+                    </div>
+                    <div class="assignment-meta">
+                        <span><i class="bi bi-book"></i> Database Management</span>
+                        <span><i class="bi bi-person"></i> Prof. Michael Brown</span>
+                    </div>
+                    <button class="btn-primary">Submit Assignment</button>
+                </div>
+
+                <div class="assignment-card normal-card">
+                    <div class="assignment-header">
+                        <div>
+                            <h4>Data Structures Quiz</h4>
+                            <p>Trees and graphs concepts</p>
+                        </div>
+                        <span class="status-badge normal">Due Next Week</span>
+                    </div>
+                    <div class="assignment-meta">
+                        <span><i class="bi bi-book"></i> Data Structures</span>
+                        <span><i class="bi bi-person"></i> Prof. Sarah Johnson</span>
+                    </div>
+                    <button class="btn-primary">Start Quiz</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             GRADES VIEW
+        ========================== -->
+
+        <div class="content-view" id="grades-view" style="display: none;">
+
+            <div class="section-header">
+                <h2>Grades</h2>
+                <p>View your academic performance</p>
+            </div>
+
+            <div class="grades-overview">
+                <div class="gpa-card">
+                    <h3>Overall GPA</h3>
+                    <div class="gpa-display">3.5</div>
+                    <p>Excellent Performance</p>
+                </div>
+            </div>
+
+            <div class="grades-table-container">
+                <table class="grades-table">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Assignment</th>
+                            <th>Grade</th>
+                            <th>Weight</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Web Development</td>
+                            <td>Project Submission</td>
+                            <td><span class="grade excellent">A+</span></td>
+                            <td>30%</td>
+                            <td>Jan 5, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Data Structures</td>
+                            <td>Midterm Exam</td>
+                            <td><span class="grade good">B+</span></td>
+                            <td>25%</td>
+                            <td>Jan 3, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Database Management</td>
+                            <td>SQL Assignment</td>
+                            <td><span class="grade excellent">A</span></td>
+                            <td>20%</td>
+                            <td>Dec 28, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Development</td>
+                            <td>UI Design Quiz</td>
+                            <td><span class="grade good">B</span></td>
+                            <td>15%</td>
+                            <td>Dec 25, 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- =========================
+             SCHEDULE VIEW
+        ========================== -->
+
+        <div class="content-view" id="schedule-view" style="display: none;">
+
+            <div class="section-header">
+                <h2>Class Schedule</h2>
+                <p>Your weekly class timetable</p>
+            </div>
+
+            <div class="schedule-grid">
+
+                <div class="schedule-day-card">
+                    <h4>Monday</h4>
+                    <div class="schedule-slots">
+                        <div class="time-slot">
+                            <span class="time">9:00 AM - 11:00 AM</span>
+                            <div class="class-info">
+                                <h5>Web Development</h5>
+                                <p>Room 301 • Prof. John Smith</p>
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time">2:00 PM - 4:00 PM</span>
+                            <div class="class-info">
+                                <h5>Database Management</h5>
+                                <p>Lab 102 • Prof. Michael Brown</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-day-card">
+                    <h4>Tuesday</h4>
+                    <div class="schedule-slots">
+                        <div class="time-slot">
+                            <span class="time">11:00 AM - 1:00 PM</span>
+                            <div class="class-info">
+                                <h5>Data Structures</h5>
+                                <p>Room 205 • Prof. Sarah Johnson</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-day-card">
+                    <h4>Wednesday</h4>
+                    <div class="schedule-slots">
+                        <div class="time-slot">
+                            <span class="time">9:00 AM - 11:00 AM</span>
+                            <div class="class-info">
+                                <h5>Web Development</h5>
+                                <p>Room 301 • Prof. John Smith</p>
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time">4:00 PM - 6:00 PM</span>
+                            <div class="class-info">
+                                <h5>Mobile App Development</h5>
+                                <p>Room 410 • Prof. Emily Davis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             RESOURCES VIEW
+        ========================== -->
+
+        <div class="content-view" id="resources-view" style="display: none;">
+
+            <div class="section-header">
+                <h2>Resources</h2>
+                <p>Access study materials and resources</p>
+            </div>
+
+            <div class="resources-grid">
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="bi bi-file-pdf"></i>
+                    </div>
+                    <h4>Lecture Notes</h4>
+                    <p>Download PDF notes from all courses</p>
+                    <button class="btn-outline">Browse</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="bi bi-play-circle"></i>
+                    </div>
+                    <h4>Video Lectures</h4>
+                    <p>Watch recorded class sessions</p>
+                    <button class="btn-outline">Watch</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+                    <h4>Code Examples</h4>
+                    <p>Access sample code and projects</p>
+                    <button class="btn-outline">View</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="bi bi-book"></i>
+                    </div>
+                    <h4>E-Library</h4>
+                    <p>Browse digital textbooks and references</p>
+                    <button class="btn-outline">Open</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             PROFILE VIEW
+        ========================== -->
+
+        <div class="content-view" id="profile-view" style="display: none;">
+
+            <div class="section-header">
+                <h2>My Profile</h2>
+                <p>Manage your account information</p>
+            </div>
+
+            <div class="profile-container">
+
+                <div class="profile-card">
+                    <div class="profile-avatar-section">
+                        <img src="https://ui-avatars.com/api/?name=Student+User&background=2563eb&color=fff&size=120" alt="Profile">
+                        <button class="btn-outline">Change Photo</button>
+                    </div>
+                    <div class="profile-info">
+                        <div class="info-group">
+                            <label>Full Name</label>
+                            <input type="text" value="Student User" class="form-input">
+                        </div>
+                        <div class="info-group">
+                            <label>Email</label>
+                            <input type="email" value="student@example.com" class="form-input">
+                        </div>
+                        <div class="info-group">
+                            <label>Student ID</label>
+                            <input type="text" value="STU2026001" class="form-input" readonly>
+                        </div>
+                        <div class="info-group">
+                            <label>Phone</label>
+                            <input type="tel" value="+1 234 567 8900" class="form-input">
+                        </div>
+                        <button class="btn-primary">Update Profile</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             SETTINGS VIEW
+        ========================== -->
+
+        <div class="content-view" id="settings-view" style="display: none;">
+
+            <div class="section-header">
+                <h2>Settings</h2>
+                <p>Customize your dashboard preferences</p>
+            </div>
+
+            <div class="settings-container">
+
+                <div class="settings-card">
+                    <h4>Notifications</h4>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Email Notifications</strong>
+                            <p>Receive assignment updates via email</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Push Notifications</strong>
+                            <p>Get browser notifications for important updates</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h4>Appearance</h4>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Theme</strong>
+                            <p>Choose your preferred color theme</p>
+                        </div>
+                        <select class="form-select">
+                            <option>Dark Mode</option>
+                            <option>Light Mode</option>
+                            <option>Auto</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h4>Privacy</h4>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Profile Visibility</strong>
+                            <p>Control who can see your profile</p>
+                        </div>
+                        <select class="form-select">
+                            <option>Everyone</option>
+                            <option>Classmates Only</option>
+                            <option>Private</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dashboard JS -->
+    <script src="js/dashboard.js"></script>
+
+    <!-- Initialize Progress Chart -->
+    <script>
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                datasets: [{
+                    label: 'Average Grade',
+                    data: [75, 78, 82, 80, 85, 88],
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37,99,235,0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(255,255,255,0.05)'
+                        },
+                        ticks: {
+                            color: '#94a3b8'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#94a3b8'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Display current date
+        const dateElement = document.getElementById('currentDate');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+    </script>
+
+</body>
+
+</html>

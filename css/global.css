@@ -1,0 +1,612 @@
+/* =====================================================
+   STACKLY - GLOBAL.CSS
+   Shared Across All Pages
+===================================================== */
+
+/* =====================================================
+   GOOGLE FONT
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* =====================================================
+   ROOT VARIABLES
+===================================================== */
+
+:root {
+
+    --primary: #2563eb;
+    --secondary: #3b82f6;
+    --accent: #60a5fa;
+
+    --bg: #0f172a;
+    --bg-light: #111827;
+
+    --card: #1e293b;
+
+    --white: #ffffff;
+
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+
+    --border: rgba(255,255,255,.08);
+
+    --shadow:
+        0 15px 40px rgba(0,0,0,.35);
+
+    --transition: all .3s ease;
+
+    --radius: 20px;
+
+}
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    overflow-x:hidden;
+
+    line-height:1.7;
+
+}
+
+a{
+    text-decoration:none;
+}
+
+ul{
+    list-style:none;
+}
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+section{
+
+    padding:100px 0;
+
+}
+
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0a0f1d;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--secondary);
+
+}
+
+/* =====================================================
+   TEXT SELECTION
+===================================================== */
+
+::selection{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* =====================================================
+   COMMON SECTION STYLES
+===================================================== */
+
+.section-tag{
+
+    display:inline-block;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    font-size:14px;
+
+    margin-bottom:1rem;
+
+}
+
+.section-title{
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    line-height:1.2;
+
+    margin-bottom:1.5rem;
+
+    color:white;
+
+}
+
+.section-description{
+
+    color:var(--muted);
+
+    font-size:1.05rem;
+
+    max-width:650px;
+
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.custom-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    border:none;
+
+    color:white;
+
+    border-radius:12px;
+
+    padding:14px 28px;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.custom-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(37,99,235,.35);
+
+}
+
+/* =====================================================
+   RIPPLE EFFECT
+===================================================== */
+
+.custom-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    animation:ripple-animation .6s linear;
+
+    background:rgba(255,255,255,.4);
+
+}
+
+@keyframes ripple-animation{
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+.loader-wrapper{
+
+    position:fixed;
+
+    inset:0;
+
+    background:var(--bg);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:99999;
+
+    transition:.5s ease;
+
+}
+
+.loader-content{
+
+    text-align:center;
+
+}
+
+.loader-content img{
+
+    width:90px;
+
+    margin:auto;
+
+    animation:loaderSpin 3s linear infinite;
+
+}
+
+.loader-content h2{
+
+    margin-top:20px;
+
+    color:white;
+
+    letter-spacing:5px;
+
+}
+
+@keyframes loaderSpin{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+/* =====================================
+   NAVBAR
+===================================== */
+
+.custom-navbar {
+
+    background: rgba(15, 23, 42, 0.95);
+
+    backdrop-filter: blur(15px);
+
+    -webkit-backdrop-filter: blur(15px);
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    transition: all 0.3s ease;
+
+    z-index: 9999;
+
+}
+
+.navbar-brand {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+.navbar-logo {
+
+    width: 180px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    transition: all 0.3s ease;
+
+}
+
+.navbar-brand:hover .navbar-logo {
+
+    transform: scale(1.05);
+
+}
+
+.nav-link {
+
+    color: rgba(255,255,255,0.8) !important;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    margin-left: 20px;
+
+    position: relative;
+
+    transition: all 0.3s ease;
+
+}
+
+.nav-link:hover {
+
+    color: #3b82f6 !important;
+
+}
+
+.nav-link.active {
+
+    color: #3b82f6 !important;
+
+}
+
+.nav-link::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: -5px;
+
+    left: 0;
+
+    width: 0;
+
+    height: 2px;
+
+    background: #3b82f6;
+
+    transition: all 0.3s ease;
+
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+
+    width: 100%;
+
+}
+
+.navbar-toggler {
+
+    border: none;
+
+    box-shadow: none !important;
+
+}
+
+.navbar-toggler:focus {
+
+    box-shadow: none !important;
+
+}
+/* =====================================================
+   COMMON CARDS
+===================================================== */
+
+.service-card,
+.why-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    transition:var(--transition);
+
+}
+
+.service-card:hover,
+.why-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:var(--shadow);
+
+}
+
+.service-icon{
+
+    width:70px;
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:18px;
+
+    margin-bottom:1.5rem;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.15),
+            rgba(59,130,246,.15)
+        );
+
+}
+
+.service-icon i{
+
+    color:var(--primary);
+
+    font-size:2rem;
+
+}
+
+/* =====================================================
+   COMPANY IMAGE
+===================================================== */
+
+.company-image{
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+/* =====================================================
+   BACK TO TOP BUTTON
+===================================================== */
+
+.back-to-top{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    width:55px;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    color:white;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:999;
+
+}
+
+.back-to-top.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+/* =====================================================
+   COMMON ANIMATIONS
+===================================================== */
+
+.fade-up{
+
+    animation:fadeUp .8s ease forwards;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =====================================================
+   PAGE LOAD EFFECT
+===================================================== */
+
+body{
+
+    animation:pageLoad .5s ease;
+
+}
+
+@keyframes pageLoad{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
