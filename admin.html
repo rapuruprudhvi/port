@@ -20,7 +20,9 @@
         <i class="fa fa-times"></i>
     </button>
     <div class="brand">
-        <h3>STACKLY</h3>
+        <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer;">
+            <h3>STACKLY</h3>
+        </a>
         <span>Admin Portal</span>
         <div class="online-status">
             <span class="status-dot"></span>
@@ -135,10 +137,10 @@
             </button>
 
             <div class="user-menu">
-                <img src="https://i.pravatar.cc/60?img=12" alt="Admin">
+                <img id="adminAvatar" src="https://i.pravatar.cc/60?img=12" alt="Admin">
                 <div class="user-info">
-                    <span class="user-name">Vivek Kumar</span>
-                    <span class="user-role">Administrator</span>
+                    <span class="user-name" id="adminName">Vivek Kumar</span>
+                    <span class="user-email" id="adminEmail">admin@stackly.com</span>
                 </div>
             </div>
         </div>
@@ -1696,7 +1698,7 @@
                     </div>
                     <div class="form-group">
                         <label>Admin Email</label>
-                        <input type="email" class="form-input" value="admin@stackly.com" required>
+                        <input type="email" id="profileEmail" class="form-input" value="admin@stackly.com" required>
                     </div>
                     <div class="form-group">
                         <label>Timezone</label>
@@ -2124,6 +2126,69 @@ window.onclick = function(event) {
         event.target.style.display = 'none';
     }
 }
+
+// Load and display logged-in admin information
+function loadAdminInfo() {
+    // Try to get login session from localStorage or sessionStorage
+    let loginSession = localStorage.getItem('loginSession') || sessionStorage.getItem('loginSession');
+
+    if (loginSession) {
+        loginSession = JSON.parse(loginSession);
+
+        // Get user data from signup
+        let userData = localStorage.getItem('userData');
+        if (userData) {
+            userData = JSON.parse(userData);
+
+            // Update admin name
+            const adminName = userData.fullname || 'Admin User';
+            document.getElementById('adminName').textContent = adminName;
+
+            // Update admin email
+            const adminEmail = loginSession.email || userData.email || 'admin@stackly.com';
+            document.getElementById('adminEmail').textContent = adminEmail;
+
+            // Update avatar with admin's name
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(adminName)}&background=6366f1&color=fff`;
+            document.getElementById('adminAvatar').src = avatarUrl;
+        } else {
+            // If no signup data, use email from login
+            const userEmail = loginSession.email || 'admin@stackly.com';
+
+            // Extract name from email
+            const emailName = userEmail.split('@')[0];
+            const displayName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
+            document.getElementById('adminName').textContent = displayName;
+
+            // Update email
+            document.getElementById('adminEmail').textContent = userEmail;
+
+            // Update avatar
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff`;
+            document.getElementById('adminAvatar').src = avatarUrl;
+        }
+    }
+}
+
+// Call the function when page loads
+loadAdminInfo();
+
+// Also update profile email field if it exists
+function updateProfileEmail() {
+    let loginSession = localStorage.getItem('loginSession') || sessionStorage.getItem('loginSession');
+    if (loginSession) {
+        loginSession = JSON.parse(loginSession);
+        const userEmail = loginSession.email || 'admin@stackly.com';
+
+        const profileEmailField = document.getElementById('profileEmail');
+        if (profileEmailField) {
+            profileEmailField.value = userEmail;
+        }
+    }
+}
+
+// Call after a short delay to ensure DOM is ready
+setTimeout(updateProfileEmail, 100);
 </script>
 
 </body>

@@ -1,343 +1,384 @@
 /* =====================================================
-   STACKLY - ERROR.CSS
-   404 PAGE STYLES
+   MODERN 404 ERROR PAGE - DARK THEME
 ===================================================== */
 
-/* =====================================================
-   ERROR SECTION
-===================================================== */
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-.error-section {
+/* CSS Variables */
+:root {
+    --bg-dark: #0a0e27;
+    --bg-darker: #060a1a;
+    --card-bg: #1a1f3a;
+    --card-light: #252b48;
+    --text-primary: #ffffff;
+    --text-secondary: #b8c5d6;
+    --text-muted: #8892a6;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --accent-light: rgba(99, 102, 241, 0.1);
+    --warning: #f59e0b;
+    --border: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
     min-height: 100vh;
-
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
     display: flex;
-
-    align-items: center;
-
     justify-content: center;
-
-    text-align: center;
-
-    padding-top: 120px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(37,99,235,.05),
-            rgba(59,130,246,.02)
-        );
-
+    align-items: center;
     position: relative;
-
-    overflow: hidden;
-
+    overflow-x: hidden;
+    padding: 20px;
 }
 
-.error-section::before {
-
-    content: "";
-
+/* Animated Background Elements */
+body::before {
+    content: '';
     position: absolute;
-
-    width: 500px;
-
-    height: 500px;
-
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+    top: -300px;
+    right: -300px;
     border-radius: 50%;
-
-    background: var(--primary);
-
-    opacity: .08;
-
-    filter: blur(180px);
-
-    top: -200px;
-
-    right: -150px;
-
+    animation: float 20s infinite ease-in-out;
 }
 
-/* =====================================================
-   ERROR CONTENT
-===================================================== */
-
-.error-content {
-
-    max-width: 750px;
-
-    margin: auto;
-
-    position: relative;
-
-    z-index: 2;
-
+body::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+    bottom: -250px;
+    left: -250px;
+    border-radius: 50%;
+    animation: float 25s infinite ease-in-out reverse;
 }
 
-.error-number {
-
-    font-size: 10rem;
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    color: var(--primary);
-
-    margin-bottom: 20px;
-
-    text-shadow:
-        0 10px 40px rgba(37,99,235,.25);
-
-    animation: float404 4s ease-in-out infinite;
-
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
 }
 
-.error-content h1 {
-
-    color: white;
-
-    font-size: 3rem;
-
-    font-weight: 800;
-
-    margin-bottom: 20px;
-
-}
-
-.error-content p {
-
-    color: var(--muted);
-
-    font-size: 1.1rem;
-
+/* Error Container */
+.error-container {
+    width: 100%;
     max-width: 600px;
-
-    margin: 0 auto 40px;
-
+    position: relative;
+    z-index: 1;
 }
 
-/* =====================================================
-   ERROR ICON
-===================================================== */
+/* Error Card */
+.error-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 60px 40px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
 
+.error-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--warning) 0%, #ef4444 100%);
+}
+
+/* Logo */
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.logo-wrapper a {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo-wrapper img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.3));
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.logo-wrapper img:hover {
+    transform: scale(1.05) rotate(5deg);
+}
+
+/* Error Number */
+.error-number {
+    font-size: 8rem;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--warning) 0%, #ef4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 24px;
+    animation: float404 3s ease-in-out infinite;
+    text-shadow: 0 10px 40px rgba(245, 158, 11, 0.3);
+}
+
+@keyframes float404 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Error Icon */
 .error-icon {
-
-    margin-bottom: 25px;
-
+    margin-bottom: 24px;
 }
 
 .error-icon i {
-
     font-size: 4rem;
-
-    color: var(--primary);
-
-    animation: rocketFloat 3s ease-in-out infinite;
-
+    color: var(--warning);
+    opacity: 0.9;
+    animation: pulse 2s ease-in-out infinite;
 }
 
-/* =====================================================
-   BUTTONS
-===================================================== */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
 
+/* Heading */
+h1 {
+    color: var(--text-primary);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+
+/* Description */
+.error-description {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Action Buttons */
 .error-buttons {
-
     display: flex;
-
+    gap: 12px;
     justify-content: center;
-
-    gap: 15px;
-
     flex-wrap: wrap;
-
+    margin-bottom: 32px;
 }
 
-.error-buttons .btn {
-
-    padding: 14px 30px;
-
+.btn-back,
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
     border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: none;
+    letter-spacing: 0.2px;
+}
 
+.btn-back {
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border: 1.5px solid var(--border);
+}
+
+.btn-back:hover {
+    background: var(--card-light);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-home {
+    background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+    color: var(--text-primary);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+}
+
+.btn-home:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    color: var(--text-primary);
+}
+
+.btn-back i,
+.btn-home i {
+    font-size: 1rem;
+}
+
+/* Quick Links */
+.quick-links {
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.9rem;
+}
+
+.quick-links span {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.quick-links a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.quick-links a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
 }
 
 /* =====================================================
-   MINI CTA
+   RESPONSIVE DESIGN
 ===================================================== */
 
-.error-cta-section {
-
-    background: var(--bg-light);
-
-}
-
-.error-cta-section .cta-box {
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(37,99,235,.15),
-            rgba(59,130,246,.05)
-        );
-
-    border: 1px solid rgba(255,255,255,.08);
-
-    border-radius: 30px;
-
-    padding: 70px 40px;
-
-}
-
-.error-cta-section .cta-box h2 {
-
-    color: white;
-
-    font-size: 2.5rem;
-
-    font-weight: 800;
-
-    margin-bottom: 20px;
-
-}
-
-.error-cta-section .cta-box p {
-
-    color: var(--muted);
-
-    max-width: 700px;
-
-    margin: auto auto 30px;
-
-}
-
-/* =====================================================
-   ANIMATIONS
-===================================================== */
-
-@keyframes float404 {
-
-    0% {
-
-        transform: translateY(0);
-
-    }
-
-    50% {
-
-        transform: translateY(-15px);
-
-    }
-
-    100% {
-
-        transform: translateY(0);
-
-    }
-
-}
-
-@keyframes rocketFloat {
-
-    0% {
-
-        transform: translateY(0);
-
-    }
-
-    50% {
-
-        transform: translateY(-10px);
-
-    }
-
-    100% {
-
-        transform: translateY(0);
-
-    }
-
-}
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 992px) {
-
-    .error-number {
-
-        font-size: 8rem;
-
-    }
-
-    .error-content h1 {
-
-        font-size: 2.5rem;
-
-    }
-
-}
-
+/* Tablet */
 @media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .error-card {
+        padding: 50px 32px;
+    }
 
     .error-number {
-
         font-size: 6rem;
-
     }
 
-    .error-content h1 {
-
-        font-size: 2rem;
-
+    h1 {
+        font-size: 1.9rem;
     }
 
-    .error-content p {
-
-        font-size: 1rem;
-
-    }
-
-    .error-cta-section .cta-box {
-
-        padding: 50px 25px;
-
-    }
-
-    .error-cta-section .cta-box h2 {
-
-        font-size: 2rem;
-
-    }
-
-}
-
-@media (max-width: 576px) {
-
-    .error-number {
-
-        font-size: 5rem;
-
+    .error-description {
+        font-size: 0.95rem;
     }
 
     .error-icon i {
+        font-size: 3.5rem;
+    }
+}
 
+/* Mobile */
+@media (max-width: 576px) {
+    body::before,
+    body::after {
+        display: none;
+    }
+
+    .error-container {
+        max-width: 100%;
+    }
+
+    .error-card {
+        padding: 40px 24px;
+        border-radius: 20px;
+    }
+
+    .error-number {
+        font-size: 5rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .error-description {
+        font-size: 0.9rem;
+        margin-bottom: 28px;
+    }
+
+    .error-icon i {
         font-size: 3rem;
+    }
 
+    .logo-wrapper img {
+        width: 70px;
+        height: 70px;
     }
 
     .error-buttons {
-
         flex-direction: column;
-
-    }
-
-    .error-buttons .btn {
-
         width: 100%;
-
     }
 
+    .btn-back,
+    .btn-home {
+        width: 100%;
+        padding: 14px 24px;
+    }
+
+    .quick-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+    .error-card {
+        padding: 32px 20px;
+    }
+
+    .error-number {
+        font-size: 4rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .btn-back,
+    .btn-home {
+        font-size: 0.9rem;
+        padding: 12px 20px;
+    }
 }

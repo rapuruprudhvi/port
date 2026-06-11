@@ -28,6 +28,7 @@ loginForm.addEventListener("submit", (e) => {
     const userRole = document.getElementById("userRole").value;
     const email = document.getElementById("email").value;
     const passwordValue = document.getElementById("password").value;
+    const rememberMe = document.getElementById("rememberMe").checked;
 
     // Basic validation
     if (!email || !passwordValue) {
@@ -35,13 +36,37 @@ loginForm.addEventListener("submit", (e) => {
         return;
     }
 
+    // Email validation with proper domain
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address with a proper domain (e.g., .com, .co, .org)");
+        return;
+    }
+
+    // Store login session
+    const loginData = {
+        role: userRole,
+        email: email,
+        rememberMe: rememberMe,
+        loginTime: new Date().toISOString()
+    };
+
+    if (rememberMe) {
+        localStorage.setItem('loginSession', JSON.stringify(loginData));
+    } else {
+        sessionStorage.setItem('loginSession', JSON.stringify(loginData));
+    }
+
+    // Show success message
+    alert(`Login successful as ${userRole}!`);
+
     // Redirect based on selected role
     switch(userRole) {
         case "Student":
             window.location.href = "dashboard.html";
             break;
         case "Developer":
-            window.location.href = "dashboard.html"; // Can change to developer-dashboard.html if needed
+            window.location.href = "developer-dashboard.html";
             break;
         case "Admin":
             window.location.href = "admin.html";

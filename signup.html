@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/signup.css">
+    <title>Sign Up - Stackly</title>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
 
@@ -23,74 +25,93 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         <div class="signup-card">
 
             <div class="logo-wrapper">
-                <img src="image/logo-stackly.webp" alt="Stackly Logo">
+                <a href="index.html">
+                    <img src="image/logo-stackly.png" alt="Stackly Logo">
+                </a>
             </div>
 
-            <h1>Stackly</h1>
+            <h1>Create Account</h1>
 
             <p class="subtitle">
-                Create your account
+                Join Stackly and start your journey
             </p>
 
-            <form id="signupForm" method="post" action="#">
+            <form id="signupForm">
 
                 <div class="mb-3">
-                    <label for="fullname">Full Name</label>
-
+                    <label for="fullname" class="form-label">Full Name</label>
                     <input
                         type="text"
                         id="fullname"
                         name="fullname"
-                        class="form-control"
+                        class="custom-input"
                         placeholder="Enter your full name"
                         required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="signupEmail">Email Address</label>
+                    <label for="userRole" class="form-label">Sign Up As</label>
+                    <select class="custom-input" id="userRole" required>
+                        <option value="">Select your role</option>
+                        <option value="Student">Student</option>
+                        <option value="Developer">Developer</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
 
+                <div class="mb-3">
+                    <label for="signupEmail" class="form-label">Email Address</label>
                     <input
                         type="email"
                         id="signupEmail"
                         name="email"
-                        class="form-control"
+                        class="custom-input"
                         placeholder="Enter your email"
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Please enter a valid email address (e.g., user@example.com)"
                         required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="signupPassword">Password</label>
-                    <div class="password-input-wrapper">
+                    <label for="signupPassword" class="form-label">Password</label>
+                    <div class="password-box">
                         <input
                             type="password"
                             id="signupPassword"
                             name="password"
-                            class="form-control"
+                            class="custom-input"
                             placeholder="Create password"
                             required>
-                        <i class="fa-solid fa-eye-slash toggle-password" data-target="signupPassword"></i>
+                        <i class="fa-solid fa-eye eye-icon" data-target="signupPassword"></i>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <div class="password-input-wrapper">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <div class="password-box">
                         <input
                             type="password"
                             id="confirmPassword"
                             name="confirmPassword"
-                            class="form-control"
+                            class="custom-input"
                             placeholder="Confirm password"
                             required>
-                        <i class="fa-solid fa-eye-slash toggle-password" data-target="confirmPassword"></i>
+                        <i class="fa-solid fa-eye eye-icon" data-target="confirmPassword"></i>
                     </div>
                 </div>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary w-100">
+                <button type="submit" class="signup-btn">
                     Create Account
                 </button>
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+                <a href="error.html" class="google-btn">
+                    <i class="fab fa-google"></i>
+                    Sign up with Google
+                </a>
 
             </form>
 
@@ -105,7 +126,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
     <script>
         // Password Toggle Functionality
-        document.querySelectorAll('.toggle-password').forEach(icon => {
+        document.querySelectorAll('.eye-icon').forEach(icon => {
             icon.addEventListener('click', function() {
                 const targetId = this.getAttribute('data-target');
                 const passwordInput = document.getElementById(targetId);
@@ -113,14 +134,55 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                 // Toggle password visibility
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                    this.classList.remove('fa-eye-slash');
-                    this.classList.add('fa-eye');
-                } else {
-                    passwordInput.type = 'password';
                     this.classList.remove('fa-eye');
                     this.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
                 }
             });
+        });
+
+        // Form Submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fullname = document.getElementById('fullname').value;
+            const role = document.getElementById('userRole').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate role selection
+            if (!role) {
+                alert('Please select your role!');
+                return;
+            }
+
+            // Email validation with proper domain
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address with a proper domain (e.g., .com, .co, .org)');
+                return;
+            }
+
+            // Validate password match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Store user data in localStorage (for demo purposes)
+            const userData = {
+                fullname: fullname,
+                role: role,
+                email: email
+            };
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            alert('Account created successfully as ' + role + '!');
+            window.location.href = 'login.html';
         });
     </script>
 

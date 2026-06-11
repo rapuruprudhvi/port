@@ -35,7 +35,9 @@
     <div class="sidebar" id="sidebar">
 
         <div class="sidebar-header">
-            <img src="image/logo-stackly.webp" alt="Stackly Logo" class="sidebar-logo">
+            <a href="index.html" style="display: block; cursor: pointer;">
+                <img src="image/logo-stackly.png" alt="Stackly Logo" class="sidebar-logo">
+            </a>
         </div>
 
         <ul class="sidebar-menu">
@@ -149,11 +151,11 @@
                 </button>
 
                 <div class="user-profile">
-                    <img src="https://ui-avatars.com/api/?name=Student+User&background=2563eb&color=fff"
+                    <img id="userAvatar" src="https://ui-avatars.com/api/?name=Student+User&background=2563eb&color=fff"
                          alt="Profile">
                     <div class="user-info">
-                        <span class="user-name">Student User</span>
-                        <span class="user-email">student@stackly.com</span>
+                        <span class="user-name" id="userName">Student User</span>
+                        <span class="user-email" id="userEmail">student@stackly.com</span>
                     </div>
                 </div>
 
@@ -1139,6 +1141,57 @@
         const dateElement = document.getElementById('currentDate');
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+
+        // Load and display logged-in user information
+        function loadUserInfo() {
+            // Try to get login session from localStorage or sessionStorage
+            let loginSession = localStorage.getItem('loginSession') || sessionStorage.getItem('loginSession');
+
+            if (loginSession) {
+                loginSession = JSON.parse(loginSession);
+
+                // Get user data from signup
+                let userData = localStorage.getItem('userData');
+                if (userData) {
+                    userData = JSON.parse(userData);
+
+                    // Update user name
+                    const userName = userData.fullname || 'User';
+                    document.getElementById('userName').textContent = userName;
+
+                    // Update user email
+                    const userEmail = loginSession.email || userData.email || 'user@stackly.com';
+                    document.getElementById('userEmail').textContent = userEmail;
+
+                    // Update avatar with user's name
+                    const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=2563eb&color=fff`;
+                    document.getElementById('userAvatar').src = avatarUrl;
+
+                    // Update welcome message with user's first name
+                    const firstName = userName.split(' ')[0];
+                    const welcomeText = document.querySelector('.welcome-section h2');
+                    if (welcomeText) {
+                        welcomeText.innerHTML = `Welcome Back, ${firstName}! 👋`;
+                    }
+                } else {
+                    // If no signup data, use email from login
+                    const userEmail = loginSession.email || 'user@stackly.com';
+                    document.getElementById('userEmail').textContent = userEmail;
+
+                    // Extract name from email
+                    const emailName = userEmail.split('@')[0];
+                    const displayName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
+                    document.getElementById('userName').textContent = displayName;
+
+                    // Update avatar
+                    const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=2563eb&color=fff`;
+                    document.getElementById('userAvatar').src = avatarUrl;
+                }
+            }
+        }
+
+        // Call the function when page loads
+        loadUserInfo();
     </script>
 
 </body>
