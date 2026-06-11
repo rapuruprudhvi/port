@@ -261,7 +261,8 @@ body {
     font-size: 14px;
 }
 
-.user-role {
+.user-role,
+.user-email {
     font-size: 12px;
     color: var(--muted);
 }
@@ -899,6 +900,26 @@ body {
     .notification-panel {
         width: 100%;
         right: -100%;
+    }
+
+    .sidebar-footer {
+        position: relative;
+        bottom: auto;
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    .logout-btn {
+        padding: 14px 20px;
+        font-size: 15px;
+        justify-content: center;
+        width: 100%;
+        background: rgba(239, 68, 68, 0.05);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .logout-btn:hover {
+        background: rgba(239, 68, 68, 0.15);
     }
 }
 

@@ -60,26 +60,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
                 <div class="mb-3">
                     <label for="signupPassword">Password</label>
-
-                    <input
-                        type="password"
-                        id="signupPassword"
-                        name="password"
-                        class="form-control"
-                        placeholder="Create password"
-                        required>
+                    <div class="password-input-wrapper">
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            name="password"
+                            class="form-control"
+                            placeholder="Create password"
+                            required>
+                        <i class="fa-solid fa-eye-slash toggle-password" data-target="signupPassword"></i>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="confirmPassword">Confirm Password</label>
-
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        class="form-control"
-                        placeholder="Confirm password"
-                        required>
+                    <div class="password-input-wrapper">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            class="form-control"
+                            placeholder="Confirm password"
+                            required>
+                        <i class="fa-solid fa-eye-slash toggle-password" data-target="confirmPassword"></i>
+                    </div>
                 </div>
 
                 <button
@@ -98,6 +102,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         </div>
 
     </div>
+
+    <script>
+        // Password Toggle Functionality
+        document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const passwordInput = document.getElementById(targetId);
+
+                // Toggle password visibility
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                } else {
+                    passwordInput.type = 'password';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

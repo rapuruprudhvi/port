@@ -28,6 +28,20 @@ if (overlay) {
 
 }
 
+// Sidebar Close Button (Mobile)
+const sidebarClose = document.getElementById("sidebarClose");
+
+if (sidebarClose) {
+
+    sidebarClose.addEventListener("click", () => {
+
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+
+    });
+
+}
+
 /* ==========================
    DARK MODE
 ========================== */

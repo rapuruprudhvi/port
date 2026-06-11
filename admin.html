@@ -11,404 +11,2025 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
 <div id="overlay" class="overlay"></div>
+
+<!-- Sidebar -->
 <aside class="sidebar">
-<div class="brand"><h3>STACKLY</h3><span>Admin Portal</span></div>
-<ul>
-<li><a href="#" onclick="showSection('dashboard')"><i class="fa fa-chart-line"></i> Dashboard</a></li>
-<li><a href="#" onclick="showSection('users')"><i class="fa fa-users"></i> Users</a></li>
-<li><a href="#" onclick="showSection('projects')"><i class="fa fa-building"></i> Projects</a></li>
-<li><a href="#" onclick="showSection('analytics')"><i class="fa fa-chart-pie"></i> Analytics</a></li>
-<li><a href="#" onclick="showSection('profile')"><i class="fa fa-user"></i> Profile</a></li>
-<li><a href="#" onclick="showSection('settings')"><i class="fa fa-gear"></i> Settings</a></li>
-<li><a href="#" id="logoutBtn"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
-</ul>
+    <button class="sidebar-close" id="sidebarClose">
+        <i class="fa fa-times"></i>
+    </button>
+    <div class="brand">
+        <h3>STACKLY</h3>
+        <span>Admin Portal</span>
+        <div class="online-status">
+            <span class="status-dot"></span>
+            <span class="status-text">System Online</span>
+        </div>
+    </div>
+    <ul>
+        <li class="active">
+            <a href="#" onclick="showSection('dashboard'); setActive(this)">
+                <i class="fa fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="showSection('users'); setActive(this)">
+                <i class="fa fa-users"></i>
+                <span>Users</span>
+                <span class="menu-badge">1,284</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="showSection('projects'); setActive(this)">
+                <i class="fa fa-building"></i>
+                <span>Projects</span>
+                <span class="menu-badge badge-warning">28</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="showSection('analytics'); setActive(this)">
+                <i class="fa fa-chart-pie"></i>
+                <span>Analytics</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="showSection('reports'); setActive(this)">
+                <i class="fa fa-file-alt"></i>
+                <span>Reports</span>
+                <span class="menu-badge badge-success">New</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="showSection('profile'); setActive(this)">
+                <i class="fa fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="showSection('settings'); setActive(this)">
+                <i class="fa fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+        <li class="sidebar-divider"></li>
+        <li>
+            <a href="#" id="logoutBtn">
+                <i class="fa fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="sidebar-footer">
+        <div class="sidebar-info">
+            <div class="version-info">
+                <span class="version-label">Version</span>
+                <span class="version-number">v2.5.0</span>
+            </div>
+            <div class="user-info-sidebar">
+                <img src="https://i.pravatar.cc/40?img=12" alt="Admin">
+                <div class="user-details">
+                    <span class="user-name-sidebar">Vivek Kumar</span>
+                    <span class="user-role-sidebar">Administrator</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </aside>
 
 <main class="main-content">
-<nav class="topbar">
-<button id="menuToggle" class="menu-btn"><i class="fa fa-bars"></i></button>
-<input type="text" placeholder="Search users, projects..." class="search-box">
-<div class="actions">
-<i id="notificationBtn" class="fa fa-bell"></i>
-<button id="darkModeToggle" class="dark-btn"><i class="bi bi-moon-fill"></i></button>
-<img src="https://i.pravatar.cc/60?img=12">
-</div>
-</nav>
 
-<!-- Notification Panel -->
-<div id="notificationPanel" class="notification-panel">
-<div class="notification-header">
-<h4>Notifications</h4>
-<button id="closeNotification"><i class="fa fa-times"></i></button>
-</div>
-<div class="notification-list">
-<div class="notification-item">
-<i class="fa fa-user-plus"></i>
-<div>
-<strong>New User Registration</strong>
-<p>Sarah Johnson registered 5 minutes ago</p>
-</div>
-</div>
-<div class="notification-item">
-<i class="fa fa-check-circle"></i>
-<div>
-<strong>Project Completed</strong>
-<p>Luxury Villa project marked as complete</p>
-</div>
-</div>
-<div class="notification-item">
-<i class="fa fa-exclamation-triangle"></i>
-<div>
-<strong>System Alert</strong>
-<p>Database backup is scheduled for tonight</p>
-</div>
-</div>
-<div class="notification-item">
-<i class="fa fa-comments"></i>
-<div>
-<strong>New Message</strong>
-<p>You have 3 unread messages</p>
-</div>
-</div>
-</div>
-</div>
+    <!-- Top Navigation Bar -->
+    <nav class="topbar">
+        <div class="topbar-left">
+            <button id="menuToggle" class="menu-btn"><i class="fa fa-bars"></i></button>
 
-<!-- Dashboard View -->
-<div id="dashboard-view" class="content-view" style="display: block;">
-<section class="hero">
-<h1>Admin Dashboard</h1>
-<p>Overview of system performance and platform activity.</p>
-</section>
+            <!-- Breadcrumb -->
+            <div class="breadcrumb-nav">
+                <i class="fa fa-home"></i>
+                <span id="breadcrumb">Dashboard</span>
+            </div>
+        </div>
 
-<section class="stats">
-<div class="card"><h2>1,284</h2><p>Total Users</p></div>
-<div class="card"><h2>42</h2><p>Projects</p></div>
-<div class="card"><h2>98%</h2><p>System Health</p></div>
-<div class="card"><h2>15</h2><p>Alerts</p></div>
-</section>
+        <!-- Desktop Search -->
+        <div class="search-wrapper desktop-search">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search anything..." class="search-box" id="globalSearch">
+        </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Analytics</h3>
-<canvas id="chart"></canvas>
-</div>
+        <div class="topbar-right">
+            <!-- Mobile Search Toggle -->
+            <button class="icon-btn mobile-search-btn" id="mobileSearchToggle" title="Search">
+                <i class="fa fa-search"></i>
+            </button>
 
-<div class="panel">
-<h3>Quick Actions</h3>
-<div class="quick">
-<button>Add User</button>
-<button>New Project</button>
-<button>Export</button>
-<button>Reports</button>
-</div>
-</div>
-</section>
+            <button class="icon-btn" id="notificationBtn" title="Notifications">
+                <i class="fa fa-bell"></i>
+                <span class="badge">5</span>
+            </button>
 
-<section class="grid">
-<div class="panel">
-<h3>Recent Activity</h3>
-<ul class="activity">
-<li>User registered</li>
-<li>Project updated</li>
-<li>Backup completed</li>
-<li>Server optimized</li>
-</ul>
-</div>
-</div>
+            <button class="icon-btn" id="darkModeToggle" title="Toggle Theme">
+                <i class="bi bi-moon-fill"></i>
+            </button>
 
-<!-- Users View -->
-<div id="users-view" class="content-view" style="display: none;">
-<section class="hero">
-<h1>User Management</h1>
-<p>Manage all users, roles, and permissions.</p>
-</section>
+            <div class="user-menu">
+                <img src="https://i.pravatar.cc/60?img=12" alt="Admin">
+                <div class="user-info">
+                    <span class="user-name">Vivek Kumar</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<section class="grid">
-<div class="panel">
-<h3>All Users</h3>
-<table>
-<tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr>
-<tr><td>Vivek Kumar</td><td>vivek@stackly.com</td><td>Admin</td><td>Active</td><td><button>Edit</button></td></tr>
-<tr><td>Rahul Sharma</td><td>rahul@stackly.com</td><td>User</td><td>Pending</td><td><button>Edit</button></td></tr>
-<tr><td>John Doe</td><td>john@stackly.com</td><td>Manager</td><td>Active</td><td><button>Edit</button></td></tr>
-<tr><td>Sarah Johnson</td><td>sarah@stackly.com</td><td>User</td><td>Active</td><td><button>Edit</button></td></tr>
-<tr><td>Mike Wilson</td><td>mike@stackly.com</td><td>Developer</td><td>Active</td><td><button>Edit</button></td></tr>
-</table>
-</div>
-</section>
+    <!-- Mobile Search Bar -->
+    <div class="mobile-search-bar" id="mobileSearchBar">
+        <div class="mobile-search-container">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search anything..." id="mobileSearchInput">
+            <button class="close-search-btn" id="closeMobileSearch">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+    </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Add New User</h3>
-<form>
-<input type="text" placeholder="Full Name" required>
-<input type="email" placeholder="Email Address" required>
-<select required>
-<option value="">Select Role</option>
-<option>Admin</option>
-<option>Manager</option>
-<option>Developer</option>
-<option>User</option>
-</select>
-<button type="submit">Add User</button>
-</form>
-</div>
+    <!-- Notification Panel -->
+    <div id="notificationPanel" class="notification-panel">
+        <div class="notification-header">
+            <h4><i class="fa fa-bell"></i> Notifications</h4>
+            <button id="closeNotification"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <div class="notif-icon bg-success">
+                    <i class="fa fa-user-plus"></i>
+                </div>
+                <div class="notif-content">
+                    <strong>New User Registration</strong>
+                    <p>Sarah Johnson registered as a student</p>
+                    <span class="notif-time">5 minutes ago</span>
+                </div>
+            </div>
+            <div class="notification-item unread">
+                <div class="notif-icon bg-primary">
+                    <i class="fa fa-check-circle"></i>
+                </div>
+                <div class="notif-content">
+                    <strong>Project Completed</strong>
+                    <p>E-commerce Platform reached 100%</p>
+                    <span class="notif-time">1 hour ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notif-icon bg-warning">
+                    <i class="fa fa-exclamation-triangle"></i>
+                </div>
+                <div class="notif-content">
+                    <strong>System Alert</strong>
+                    <p>Database backup scheduled for tonight</p>
+                    <span class="notif-time">3 hours ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notif-icon bg-info">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="notif-content">
+                    <strong>New Messages</strong>
+                    <p>You have 3 unread messages</p>
+                    <span class="notif-time">5 hours ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notif-icon bg-danger">
+                    <i class="fa fa-bug"></i>
+                </div>
+                <div class="notif-content">
+                    <strong>Bug Report</strong>
+                    <p>Critical issue in payment module</p>
+                    <span class="notif-time">1 day ago</span>
+                </div>
+            </div>
+        </div>
+        <div class="notification-footer">
+            <a href="#">View All Notifications</a>
+        </div>
+    </div>
 
-<div class="panel">
-<h3>User Statistics</h3>
-<div class="stats">
-<div class="card"><h2>1,284</h2><p>Total Users</p></div>
-<div class="card"><h2>342</h2><p>Active Today</p></div>
-<div class="card"><h2>15</h2><p>Pending</p></div>
-</div>
-</div>
-</section>
-</div>
+    <!-- ==================== DASHBOARD VIEW ==================== -->
+    <div id="dashboard-view" class="content-view" style="display: block;">
 
-<!-- Projects View -->
-<div id="projects-view" class="content-view" style="display: none;">
-<section class="hero">
-<h1>Projects</h1>
-<p>Manage all projects and their status.</p>
-</section>
+        <div class="page-header">
+            <div>
+                <h1>Dashboard Overview</h1>
+                <p>Welcome back, Vivek! Here's what's happening today.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary"><i class="fa fa-download"></i> Export Report</button>
+                <button class="btn-primary"><i class="fa fa-plus"></i> Quick Action</button>
+            </div>
+        </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Active Projects</h3>
-<table>
-<tr><th>Project Name</th><th>Client</th><th>Status</th><th>Progress</th><th>Deadline</th></tr>
-<tr><td>E-commerce Platform</td><td>TechCorp</td><td>In Progress</td><td>75%</td><td>Dec 30, 2026</td></tr>
-<tr><td>Mobile Banking App</td><td>FinanceHub</td><td>In Progress</td><td>60%</td><td>Jan 15, 2027</td></tr>
-<tr><td>Luxury Villa Website</td><td>RealEstate Pro</td><td>Completed</td><td>100%</td><td>Nov 20, 2026</td></tr>
-<tr><td>Corporate Tower Site</td><td>BuildCo</td><td>In Progress</td><td>40%</td><td>Feb 10, 2027</td></tr>
-<tr><td>Healthcare Portal</td><td>MediLife</td><td>Planning</td><td>10%</td><td>Mar 05, 2027</td></tr>
-</table>
-</div>
-</section>
+        <!-- Stats Cards -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon bg-gradient-blue">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="stat-details">
+                    <span class="stat-label">Total Users</span>
+                    <h2 class="stat-value">1,284</h2>
+                    <div class="stat-change positive">
+                        <i class="fa fa-arrow-up"></i> 12.5% from last month
+                    </div>
+                </div>
+            </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Project Statistics</h3>
-<div class="stats">
-<div class="card"><h2>42</h2><p>Total Projects</p></div>
-<div class="card"><h2>28</h2><p>Active</p></div>
-<div class="card"><h2>12</h2><p>Completed</p></div>
-<div class="card"><h2>2</h2><p>On Hold</p></div>
-</div>
-</div>
+            <div class="stat-card">
+                <div class="stat-icon bg-gradient-purple">
+                    <i class="fa fa-building"></i>
+                </div>
+                <div class="stat-details">
+                    <span class="stat-label">Active Projects</span>
+                    <h2 class="stat-value">42</h2>
+                    <div class="stat-change positive">
+                        <i class="fa fa-arrow-up"></i> 8.2% this week
+                    </div>
+                </div>
+            </div>
 
-<div class="panel">
-<h3>Create New Project</h3>
-<form>
-<input type="text" placeholder="Project Name" required>
-<input type="text" placeholder="Client Name" required>
-<input type="date" placeholder="Deadline" required>
-<button type="submit">Create Project</button>
-</form>
-</div>
-</section>
-</div>
+            <div class="stat-card">
+                <div class="stat-icon bg-gradient-green">
+                    <i class="fa fa-dollar-sign"></i>
+                </div>
+                <div class="stat-details">
+                    <span class="stat-label">Revenue</span>
+                    <h2 class="stat-value">$84.2K</h2>
+                    <div class="stat-change positive">
+                        <i class="fa fa-arrow-up"></i> 18.5% growth
+                    </div>
+                </div>
+            </div>
 
-<!-- Analytics View -->
-<div id="analytics-view" class="content-view" style="display: none;">
-<section class="hero">
-<h1>Analytics</h1>
-<p>Detailed insights and performance metrics.</p>
-</section>
+            <div class="stat-card">
+                <div class="stat-icon bg-gradient-orange">
+                    <i class="fa fa-server"></i>
+                </div>
+                <div class="stat-details">
+                    <span class="stat-label">System Health</span>
+                    <h2 class="stat-value">98.5%</h2>
+                    <div class="stat-change neutral">
+                        <i class="fa fa-check-circle"></i> All systems operational
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<section class="stats">
-<div class="card"><h2>45,231</h2><p>Page Views</p></div>
-<div class="card"><h2>12,842</h2><p>Unique Visitors</p></div>
-<div class="card"><h2>3.2min</h2><p>Avg. Session</p></div>
-<div class="card"><h2>68%</h2><p>Bounce Rate</p></div>
-</section>
+        <!-- Charts and Activity -->
+        <div class="grid-2">
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-chart-line"></i> User Growth Analytics</h3>
+                    <div class="panel-actions">
+                        <select class="form-select-sm">
+                            <option>Last 7 Days</option>
+                            <option>Last Month</option>
+                            <option>Last Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Traffic Analytics</h3>
-<canvas id="trafficChart"></canvas>
-</div>
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-tasks"></i> Project Status</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="projectChart"></canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #667eea;"></span>
+                        <span>In Progress (28)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #22c55e;"></span>
+                        <span>Completed (12)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #f59e0b;"></span>
+                        <span>On Hold (2)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="panel">
-<h3>User Engagement</h3>
-<canvas id="engagementChart"></canvas>
-</div>
-</section>
+        <!-- Recent Activity and Quick Actions -->
+        <div class="grid-3">
+            <div class="panel span-2">
+                <div class="panel-header">
+                    <h3><i class="fa fa-clock"></i> Recent Activity</h3>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                <div class="activity-timeline">
+                    <div class="activity-item">
+                        <div class="activity-icon bg-success">
+                            <i class="fa fa-user-check"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Sarah Johnson</strong> registered as a new user</p>
+                            <span class="activity-time">5 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon bg-primary">
+                            <i class="fa fa-file-upload"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Mobile Banking App</strong> files uploaded</p>
+                            <span class="activity-time">1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon bg-warning">
+                            <i class="fa fa-edit"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>E-commerce Platform</strong> status updated</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon bg-info">
+                            <i class="fa fa-database"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p>System backup completed successfully</p>
+                            <span class="activity-time">3 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon bg-danger">
+                            <i class="fa fa-trash"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Old Project Files</strong> removed from server</p>
+                            <span class="activity-time">5 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Top Pages</h3>
-<table>
-<tr><th>Page</th><th>Views</th><th>Avg. Time</th></tr>
-<tr><td>/dashboard</td><td>12,340</td><td>4.2min</td></tr>
-<tr><td>/projects</td><td>8,921</td><td>3.5min</td></tr>
-<tr><td>/users</td><td>6,542</td><td>2.8min</td></tr>
-</table>
-</div>
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-bolt"></i> Quick Actions</h3>
+                </div>
+                <div class="quick-actions">
+                    <button class="action-btn" onclick="showSection('users')">
+                        <i class="fa fa-user-plus"></i>
+                        <span>Add New User</span>
+                    </button>
+                    <button class="action-btn" onclick="showSection('projects')">
+                        <i class="fa fa-folder-plus"></i>
+                        <span>Create Project</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fa fa-file-export"></i>
+                        <span>Export Data</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fa fa-cog"></i>
+                        <span>System Settings</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fa fa-chart-bar"></i>
+                        <span>View Reports</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fa fa-database"></i>
+                        <span>Backup Now</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-<div class="panel">
-<h3>Performance Metrics</h3>
-<ul class="activity">
-<li>Server Response Time: 120ms</li>
-<li>API Success Rate: 99.8%</li>
-<li>Database Queries: 2.3s avg</li>
-<li>Cache Hit Rate: 94%</li>
-</ul>
-</div>
-</section>
-</div>
+        <!-- System Status -->
+        <div class="panel">
+            <div class="panel-header">
+                <h3><i class="fa fa-server"></i> System Status</h3>
+            </div>
+            <div class="system-status-grid">
+                <div class="status-item">
+                    <div class="status-header">
+                        <span>Server Status</span>
+                        <span class="status-badge success">Online</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar success" style="width: 98%;"></div>
+                    </div>
+                    <span class="status-text">CPU: 32% | RAM: 64% | Disk: 45%</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-header">
+                        <span>Database</span>
+                        <span class="status-badge success">Healthy</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar success" style="width: 95%;"></div>
+                    </div>
+                    <span class="status-text">Queries: 2.3s avg | Connections: 45/100</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-header">
+                        <span>API Services</span>
+                        <span class="status-badge success">Running</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar success" style="width: 99%;"></div>
+                    </div>
+                    <span class="status-text">Response Time: 120ms | Success Rate: 99.8%</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-header">
+                        <span>Storage</span>
+                        <span class="status-badge warning">75% Used</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar warning" style="width: 75%;"></div>
+                    </div>
+                    <span class="status-text">450 GB / 600 GB used</span>
+                </div>
+            </div>
+        </div>
 
-<!-- Profile View -->
-<div id="profile-view" class="content-view" style="display: none;">
-<section class="hero">
-<h1>Admin Profile</h1>
-<p>Manage your account settings and preferences.</p>
-</section>
+    </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Personal Information</h3>
-<form>
-<label>Full Name</label>
-<input type="text" value="Vivek Kumar" required>
-<label>Email Address</label>
-<input type="email" value="vivek@stackly.com" required>
-<label>Phone Number</label>
-<input type="tel" value="+91 9108765432" required>
-<label>Position</label>
-<input type="text" value="System Administrator" required>
-<button type="submit">Update Profile</button>
-</form>
-</div>
+    <!-- ==================== USERS VIEW ==================== -->
+    <div id="users-view" class="content-view" style="display: none;">
 
-<div class="panel">
-<h3>Profile Picture</h3>
-<div style="text-align: center; padding: 2rem;">
-<img src="https://i.pravatar.cc/150?img=12" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 1rem;">
-<br>
-<button>Change Picture</button>
-</div>
-</div>
-</section>
+        <div class="page-header">
+            <div>
+                <h1>User Management</h1>
+                <p>Manage users, roles, and permissions across the platform.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary"><i class="fa fa-download"></i> Export Users</button>
+                <button class="btn-primary" onclick="document.getElementById('addUserModal').style.display='block'">
+                    <i class="fa fa-user-plus"></i> Add New User
+                </button>
+            </div>
+        </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Change Password</h3>
-<form>
-<label>Current Password</label>
-<input type="password" required>
-<label>New Password</label>
-<input type="password" required>
-<label>Confirm New Password</label>
-<input type="password" required>
-<button type="submit">Update Password</button>
-</form>
-</div>
+        <!-- User Stats -->
+        <div class="stats-row">
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-blue">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div>
+                    <h3>1,284</h3>
+                    <span>Total Users</span>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-green">
+                    <i class="fa fa-user-check"></i>
+                </div>
+                <div>
+                    <h3>342</h3>
+                    <span>Active Today</span>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-orange">
+                    <i class="fa fa-user-clock"></i>
+                </div>
+                <div>
+                    <h3>15</h3>
+                    <span>Pending Approval</span>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-red">
+                    <i class="fa fa-user-slash"></i>
+                </div>
+                <div>
+                    <h3>8</h3>
+                    <span>Inactive</span>
+                </div>
+            </div>
+        </div>
 
-<div class="panel">
-<h3>Account Activity</h3>
-<ul class="activity">
-<li>Last Login: Today at 9:30 AM</li>
-<li>Password Changed: 2 weeks ago</li>
-<li>Profile Updated: 1 month ago</li>
-<li>Account Created: Jan 15, 2025</li>
-</ul>
-</div>
-</section>
-</div>
+        <!-- Users Table -->
+        <div class="panel">
+            <div class="panel-header">
+                <h3><i class="fa fa-table"></i> All Users</h3>
+                <div class="panel-actions">
+                    <div class="filter-group">
+                        <select class="form-select-sm">
+                            <option>All Roles</option>
+                            <option>Admin</option>
+                            <option>Manager</option>
+                            <option>Developer</option>
+                            <option>User</option>
+                        </select>
+                        <select class="form-select-sm">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Pending</option>
+                            <option>Inactive</option>
+                        </select>
+                        <input type="text" class="form-input-sm" placeholder="Search users...">
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                            <th>Last Active</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="user-cell">
+                                    <img src="https://i.pravatar.cc/40?img=12" alt="User">
+                                    <span>Vivek Kumar</span>
+                                </div>
+                            </td>
+                            <td>vivek@stackly.com</td>
+                            <td><span class="role-badge admin">Admin</span></td>
+                            <td><span class="status-badge success">Active</span></td>
+                            <td>Jan 15, 2025</td>
+                            <td>2 mins ago</td>
+                            <td>
+                                <button class="icon-btn-sm" title="Edit"><i class="fa fa-edit"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="user-cell">
+                                    <img src="https://i.pravatar.cc/40?img=5" alt="User">
+                                    <span>Sarah Johnson</span>
+                                </div>
+                            </td>
+                            <td>sarah@stackly.com</td>
+                            <td><span class="role-badge user">User</span></td>
+                            <td><span class="status-badge success">Active</span></td>
+                            <td>Jun 10, 2026</td>
+                            <td>10 mins ago</td>
+                            <td>
+                                <button class="icon-btn-sm" title="Edit"><i class="fa fa-edit"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="user-cell">
+                                    <img src="https://i.pravatar.cc/40?img=8" alt="User">
+                                    <span>Rahul Sharma</span>
+                                </div>
+                            </td>
+                            <td>rahul@stackly.com</td>
+                            <td><span class="role-badge manager">Manager</span></td>
+                            <td><span class="status-badge warning">Pending</span></td>
+                            <td>Jun 8, 2026</td>
+                            <td>Never</td>
+                            <td>
+                                <button class="icon-btn-sm" title="Edit"><i class="fa fa-edit"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="user-cell">
+                                    <img src="https://i.pravatar.cc/40?img=3" alt="User">
+                                    <span>John Doe</span>
+                                </div>
+                            </td>
+                            <td>john@stackly.com</td>
+                            <td><span class="role-badge developer">Developer</span></td>
+                            <td><span class="status-badge success">Active</span></td>
+                            <td>May 22, 2026</td>
+                            <td>1 hour ago</td>
+                            <td>
+                                <button class="icon-btn-sm" title="Edit"><i class="fa fa-edit"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="user-cell">
+                                    <img src="https://i.pravatar.cc/40?img=9" alt="User">
+                                    <span>Mike Wilson</span>
+                                </div>
+                            </td>
+                            <td>mike@stackly.com</td>
+                            <td><span class="role-badge developer">Developer</span></td>
+                            <td><span class="status-badge success">Active</span></td>
+                            <td>Apr 18, 2026</td>
+                            <td>5 hours ago</td>
+                            <td>
+                                <button class="icon-btn-sm" title="Edit"><i class="fa fa-edit"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="user-cell">
+                                    <img src="https://i.pravatar.cc/40?img=1" alt="User">
+                                    <span>Emily Davis</span>
+                                </div>
+                            </td>
+                            <td>emily@stackly.com</td>
+                            <td><span class="role-badge user">User</span></td>
+                            <td><span class="status-badge danger">Inactive</span></td>
+                            <td>Mar 10, 2026</td>
+                            <td>2 days ago</td>
+                            <td>
+                                <button class="icon-btn-sm" title="Edit"><i class="fa fa-edit"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-footer">
+                <div>Showing 1 to 6 of 1,284 users</div>
+                <div class="pagination">
+                    <button class="btn-pagination" disabled><i class="fa fa-chevron-left"></i></button>
+                    <button class="btn-pagination active">1</button>
+                    <button class="btn-pagination">2</button>
+                    <button class="btn-pagination">3</button>
+                    <button class="btn-pagination">...</button>
+                    <button class="btn-pagination">215</button>
+                    <button class="btn-pagination"><i class="fa fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
 
-<!-- Settings View -->
-<div id="settings-view" class="content-view" style="display: none;">
-<section class="hero">
-<h1>Settings</h1>
-<p>Configure system preferences and options.</p>
-</section>
+    </div>
 
-<section class="grid">
-<div class="panel">
-<h3>General Settings</h3>
-<form>
-<label>Site Name</label>
-<input type="text" value="Stackly Admin Portal" required>
-<label>Site URL</label>
-<input type="url" value="https://admin.stackly.com" required>
-<label>Admin Email</label>
-<input type="email" value="admin@stackly.com" required>
-<label>Timezone</label>
-<select required>
-<option>UTC +5:30 (IST)</option>
-<option>UTC +0:00 (GMT)</option>
-<option>UTC -5:00 (EST)</option>
-</select>
-<button type="submit">Save Settings</button>
-</form>
-</div>
+    <!-- ==================== PROJECTS VIEW ==================== -->
+    <div id="projects-view" class="content-view" style="display: none;">
 
-<div class="panel">
-<h3>Notification Settings</h3>
-<div style="padding: 1rem;">
-<label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-<input type="checkbox" checked>
-<span>Email Notifications</span>
-</label>
-<label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-<input type="checkbox" checked>
-<span>SMS Alerts</span>
-</label>
-<label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-<input type="checkbox">
-<span>Push Notifications</span>
-</label>
-<label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-<input type="checkbox" checked>
-<span>Weekly Reports</span>
-</label>
-<button>Update Preferences</button>
-</div>
-</div>
-</section>
+        <div class="page-header">
+            <div>
+                <h1>Projects</h1>
+                <p>Manage and track all projects across the organization.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary"><i class="fa fa-filter"></i> Filters</button>
+                <button class="btn-primary" onclick="document.getElementById('createProjectModal').style.display='block'">
+                    <i class="fa fa-plus"></i> Create Project
+                </button>
+            </div>
+        </div>
 
-<section class="grid">
-<div class="panel">
-<h3>Security Settings</h3>
-<form>
-<label>Two-Factor Authentication</label>
-<select required>
-<option>Enabled</option>
-<option>Disabled</option>
-</select>
-<label>Session Timeout (minutes)</label>
-<input type="number" value="30" required>
-<label>Allowed IP Addresses</label>
-<textarea rows="3" placeholder="Enter IP addresses, one per line"></textarea>
-<button type="submit">Update Security</button>
-</form>
-</div>
+        <!-- Project Stats -->
+        <div class="stats-row">
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-blue">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <div>
+                    <h3>42</h3>
+                    <span>Total Projects</span>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-orange">
+                    <i class="fa fa-spinner"></i>
+                </div>
+                <div>
+                    <h3>28</h3>
+                    <span>In Progress</span>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-green">
+                    <i class="fa fa-check-circle"></i>
+                </div>
+                <div>
+                    <h3>12</h3>
+                    <span>Completed</span>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-red">
+                    <i class="fa fa-pause-circle"></i>
+                </div>
+                <div>
+                    <h3>2</h3>
+                    <span>On Hold</span>
+                </div>
+            </div>
+        </div>
 
-<div class="panel">
-<h3>Backup & Maintenance</h3>
-<div style="padding: 1rem;">
-<p><strong>Last Backup:</strong> Today at 2:00 AM</p>
-<p><strong>Next Scheduled:</strong> Tomorrow at 2:00 AM</p>
-<p><strong>Backup Location:</strong> Cloud Storage</p>
-<button style="margin-top: 1rem;">Run Backup Now</button>
-<button style="margin-top: 0.5rem;">View Backup History</button>
-</div>
-</div>
-</section>
-</div>
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>E-commerce Platform</h4>
+                        <span class="project-badge in-progress">In Progress</span>
+                    </div>
+                    <div class="project-menu">
+                        <button class="icon-btn-sm"><i class="fa fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <p class="project-desc">Full-featured e-commerce solution with payment gateway integration</p>
+                <div class="project-meta">
+                    <span><i class="fa fa-user"></i> TechCorp</span>
+                    <span><i class="fa fa-calendar"></i> Dec 30, 2026</span>
+                </div>
+                <div class="project-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span class="progress-percent">75%</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar success" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <img src="https://i.pravatar.cc/30?img=1" alt="Member">
+                        <img src="https://i.pravatar.cc/30?img=2" alt="Member">
+                        <img src="https://i.pravatar.cc/30?img=3" alt="Member">
+                        <span class="team-count">+5</span>
+                    </div>
+                    <button class="btn-secondary-sm">View Details</button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>Mobile Banking App</h4>
+                        <span class="project-badge in-progress">In Progress</span>
+                    </div>
+                    <div class="project-menu">
+                        <button class="icon-btn-sm"><i class="fa fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <p class="project-desc">Secure mobile banking application for iOS and Android platforms</p>
+                <div class="project-meta">
+                    <span><i class="fa fa-user"></i> FinanceHub</span>
+                    <span><i class="fa fa-calendar"></i> Jan 15, 2027</span>
+                </div>
+                <div class="project-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span class="progress-percent">60%</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar warning" style="width: 60%;"></div>
+                    </div>
+                </div>
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <img src="https://i.pravatar.cc/30?img=4" alt="Member">
+                        <img src="https://i.pravatar.cc/30?img=5" alt="Member">
+                        <span class="team-count">+3</span>
+                    </div>
+                    <button class="btn-secondary-sm">View Details</button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>Luxury Villa Website</h4>
+                        <span class="project-badge completed">Completed</span>
+                    </div>
+                    <div class="project-menu">
+                        <button class="icon-btn-sm"><i class="fa fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <p class="project-desc">Premium real estate website with virtual tour capabilities</p>
+                <div class="project-meta">
+                    <span><i class="fa fa-user"></i> RealEstate Pro</span>
+                    <span><i class="fa fa-calendar"></i> Nov 20, 2026</span>
+                </div>
+                <div class="project-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span class="progress-percent">100%</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar success" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <img src="https://i.pravatar.cc/30?img=6" alt="Member">
+                        <img src="https://i.pravatar.cc/30?img=7" alt="Member">
+                        <img src="https://i.pravatar.cc/30?img=8" alt="Member">
+                    </div>
+                    <button class="btn-secondary-sm">View Details</button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>Corporate Tower Site</h4>
+                        <span class="project-badge in-progress">In Progress</span>
+                    </div>
+                    <div class="project-menu">
+                        <button class="icon-btn-sm"><i class="fa fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <p class="project-desc">Modern corporate website with CMS integration</p>
+                <div class="project-meta">
+                    <span><i class="fa fa-user"></i> BuildCo</span>
+                    <span><i class="fa fa-calendar"></i> Feb 10, 2027</span>
+                </div>
+                <div class="project-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span class="progress-percent">40%</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar warning" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <img src="https://i.pravatar.cc/30?img=9" alt="Member">
+                        <img src="https://i.pravatar.cc/30?img=10" alt="Member">
+                    </div>
+                    <button class="btn-secondary-sm">View Details</button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>Healthcare Portal</h4>
+                        <span class="project-badge planning">Planning</span>
+                    </div>
+                    <div class="project-menu">
+                        <button class="icon-btn-sm"><i class="fa fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <p class="project-desc">Patient management system with appointment scheduling</p>
+                <div class="project-meta">
+                    <span><i class="fa fa-user"></i> MediLife</span>
+                    <span><i class="fa fa-calendar"></i> Mar 05, 2027</span>
+                </div>
+                <div class="project-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span class="progress-percent">10%</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar danger" style="width: 10%;"></div>
+                    </div>
+                </div>
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <img src="https://i.pravatar.cc/30?img=11" alt="Member">
+                        <span class="team-count">+2</span>
+                    </div>
+                    <button class="btn-secondary-sm">View Details</button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>AI Analytics Dashboard</h4>
+                        <span class="project-badge on-hold">On Hold</span>
+                    </div>
+                    <div class="project-menu">
+                        <button class="icon-btn-sm"><i class="fa fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <p class="project-desc">AI-powered business intelligence dashboard</p>
+                <div class="project-meta">
+                    <span><i class="fa fa-user"></i> DataCorp</span>
+                    <span><i class="fa fa-calendar"></i> TBD</span>
+                </div>
+                <div class="project-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span class="progress-percent">25%</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar danger" style="width: 25%;"></div>
+                    </div>
+                </div>
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <img src="https://i.pravatar.cc/30?img=12" alt="Member">
+                    </div>
+                    <button class="btn-secondary-sm">View Details</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==================== ANALYTICS VIEW ==================== -->
+    <div id="analytics-view" class="content-view" style="display: none;">
+
+        <div class="page-header">
+            <div>
+                <h1>Analytics & Insights</h1>
+                <p>Comprehensive analytics and performance metrics.</p>
+            </div>
+            <div class="header-actions">
+                <select class="form-select">
+                    <option>Last 7 Days</option>
+                    <option>Last 30 Days</option>
+                    <option>Last 90 Days</option>
+                    <option>Last Year</option>
+                    <option>Custom Range</option>
+                </select>
+                <button class="btn-primary"><i class="fa fa-download"></i> Export Report</button>
+            </div>
+        </div>
+
+        <!-- Analytics Stats -->
+        <div class="stats-row">
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-blue">
+                    <i class="fa fa-eye"></i>
+                </div>
+                <div>
+                    <h3>45.2K</h3>
+                    <span>Page Views</span>
+                    <small class="text-success">+12.5%</small>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-purple">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div>
+                    <h3>12.8K</h3>
+                    <span>Visitors</span>
+                    <small class="text-success">+8.2%</small>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-orange">
+                    <i class="fa fa-clock"></i>
+                </div>
+                <div>
+                    <h3>3.2 min</h3>
+                    <span>Avg. Session</span>
+                    <small class="text-danger">-2.1%</small>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-green">
+                    <i class="fa fa-chart-line"></i>
+                </div>
+                <div>
+                    <h3>32%</h3>
+                    <span>Bounce Rate</span>
+                    <small class="text-success">-5.3%</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid-2">
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-chart-bar"></i> Traffic Analytics</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="trafficChart"></canvas>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-chart-pie"></i> User Engagement</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="engagementChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Analytics -->
+        <div class="grid-3">
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-file-alt"></i> Top Pages</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>Views</th>
+                                <th>Avg. Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>/dashboard</td>
+                                <td>12,340</td>
+                                <td>4.2 min</td>
+                            </tr>
+                            <tr>
+                                <td>/projects</td>
+                                <td>8,921</td>
+                                <td>3.5 min</td>
+                            </tr>
+                            <tr>
+                                <td>/users</td>
+                                <td>6,542</td>
+                                <td>2.8 min</td>
+                            </tr>
+                            <tr>
+                                <td>/analytics</td>
+                                <td>4,231</td>
+                                <td>5.1 min</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-globe"></i> Traffic Sources</h3>
+                </div>
+                <div class="traffic-sources">
+                    <div class="traffic-item">
+                        <div class="traffic-info">
+                            <span>Direct</span>
+                            <strong>45%</strong>
+                        </div>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar success" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="traffic-item">
+                        <div class="traffic-info">
+                            <span>Organic Search</span>
+                            <strong>30%</strong>
+                        </div>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar primary" style="width: 30%;"></div>
+                        </div>
+                    </div>
+                    <div class="traffic-item">
+                        <div class="traffic-info">
+                            <span>Social Media</span>
+                            <strong>15%</strong>
+                        </div>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar warning" style="width: 15%;"></div>
+                        </div>
+                    </div>
+                    <div class="traffic-item">
+                        <div class="traffic-info">
+                            <span>Referral</span>
+                            <strong>10%</strong>
+                        </div>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar danger" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-tachometer-alt"></i> Performance</h3>
+                </div>
+                <div class="performance-metrics">
+                    <div class="metric-item">
+                        <span>Server Response</span>
+                        <div class="metric-value">
+                            <strong>120ms</strong>
+                            <span class="text-success"><i class="fa fa-check-circle"></i> Good</span>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <span>API Success Rate</span>
+                        <div class="metric-value">
+                            <strong>99.8%</strong>
+                            <span class="text-success"><i class="fa fa-check-circle"></i> Excellent</span>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <span>Database Queries</span>
+                        <div class="metric-value">
+                            <strong>2.3s avg</strong>
+                            <span class="text-warning"><i class="fa fa-exclamation-circle"></i> Fair</span>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <span>Cache Hit Rate</span>
+                        <div class="metric-value">
+                            <strong>94%</strong>
+                            <span class="text-success"><i class="fa fa-check-circle"></i> Great</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== REPORTS VIEW ==================== -->
+    <div id="reports-view" class="content-view" style="display: none;">
+
+        <div class="page-header">
+            <div>
+                <h1>Reports & Analytics</h1>
+                <p>Generate, schedule, and download comprehensive system reports.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary"><i class="fa fa-clock"></i> Scheduled Reports</button>
+                <button class="btn-primary"><i class="fa fa-plus"></i> Create Custom Report</button>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-row">
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-blue">
+                    <i class="fa fa-file-alt"></i>
+                </div>
+                <div>
+                    <h3>247</h3>
+                    <span>Total Reports</span>
+                    <small class="text-success">+12 this month</small>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-green">
+                    <i class="fa fa-check-circle"></i>
+                </div>
+                <div>
+                    <h3>18</h3>
+                    <span>Scheduled</span>
+                    <small class="text-info">Auto-generated</small>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-orange">
+                    <i class="fa fa-spinner"></i>
+                </div>
+                <div>
+                    <h3>3</h3>
+                    <span>Processing</span>
+                    <small class="text-warning">In queue</small>
+                </div>
+            </div>
+            <div class="stat-card-sm">
+                <div class="stat-icon-sm bg-purple">
+                    <i class="fa fa-download"></i>
+                </div>
+                <div>
+                    <h3>1.2K</h3>
+                    <span>Downloads</span>
+                    <small class="text-muted">Last 30 days</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="report-card">
+                <div class="report-status scheduled">
+                    <i class="fa fa-clock"></i>
+                    <span>Scheduled</span>
+                </div>
+                <div class="report-icon bg-blue">
+                    <i class="fa fa-users"></i>
+                </div>
+                <h4>User Activity Report</h4>
+                <p>Detailed user engagement and activity metrics</p>
+                <div class="report-meta">
+                    <span><i class="fa fa-calendar"></i> Last 30 days</span>
+                    <span><i class="fa fa-file-pdf"></i> PDF</span>
+                </div>
+                <div class="report-schedule">
+                    <small><i class="fa fa-clock"></i> Next: Today at 11:00 PM</small>
+                </div>
+                <button class="btn-primary-sm"><i class="fa fa-play"></i> Generate Now</button>
+            </div>
+
+            <div class="report-card">
+                <div class="report-status active">
+                    <i class="fa fa-spinner fa-spin"></i>
+                    <span>Processing</span>
+                </div>
+                <div class="report-icon bg-green">
+                    <i class="fa fa-dollar-sign"></i>
+                </div>
+                <h4>Revenue Report</h4>
+                <p>Financial overview and revenue analysis</p>
+                <div class="report-meta">
+                    <span><i class="fa fa-calendar"></i> Monthly</span>
+                    <span><i class="fa fa-file-excel"></i> Excel</span>
+                </div>
+                <div class="progress-bar-wrapper" style="margin-top: 10px;">
+                    <div class="progress-bar success" style="width: 67%;"></div>
+                </div>
+                <small class="text-muted" style="display: block; margin-top: 5px;">67% Complete</small>
+            </div>
+
+            <div class="report-card">
+                <div class="report-status scheduled">
+                    <i class="fa fa-clock"></i>
+                    <span>Scheduled</span>
+                </div>
+                <div class="report-icon bg-purple">
+                    <i class="fa fa-chart-line"></i>
+                </div>
+                <h4>Performance Report</h4>
+                <p>System performance and health metrics</p>
+                <div class="report-meta">
+                    <span><i class="fa fa-calendar"></i> Weekly</span>
+                    <span><i class="fa fa-file-pdf"></i> PDF</span>
+                </div>
+                <div class="report-schedule">
+                    <small><i class="fa fa-clock"></i> Next: Monday at 8:00 AM</small>
+                </div>
+                <button class="btn-primary-sm"><i class="fa fa-play"></i> Generate Now</button>
+            </div>
+
+            <div class="report-card">
+                <div class="report-icon bg-orange">
+                    <i class="fa fa-tasks"></i>
+                </div>
+                <h4>Project Status Report</h4>
+                <p>Complete overview of all project statuses</p>
+                <div class="report-meta">
+                    <span><i class="fa fa-sync"></i> Real-time</span>
+                    <span><i class="fa fa-file-csv"></i> CSV</span>
+                </div>
+                <div class="report-schedule">
+                    <small><i class="fa fa-info-circle"></i> Always up-to-date</small>
+                </div>
+                <button class="btn-primary-sm"><i class="fa fa-download"></i> Download</button>
+            </div>
+
+            <div class="report-card">
+                <div class="report-status scheduled">
+                    <i class="fa fa-clock"></i>
+                    <span>Scheduled</span>
+                </div>
+                <div class="report-icon bg-red">
+                    <i class="fa fa-bug"></i>
+                </div>
+                <h4>Error & Bug Report</h4>
+                <p>System errors and bug tracking report</p>
+                <div class="report-meta">
+                    <span><i class="fa fa-calendar"></i> Daily</span>
+                    <span><i class="fa fa-file-pdf"></i> PDF</span>
+                </div>
+                <div class="report-schedule">
+                    <small><i class="fa fa-clock"></i> Next: Tomorrow at 6:00 AM</small>
+                </div>
+                <button class="btn-primary-sm"><i class="fa fa-play"></i> Generate Now</button>
+            </div>
+
+            <div class="report-card">
+                <div class="report-status scheduled">
+                    <i class="fa fa-clock"></i>
+                    <span>Scheduled</span>
+                </div>
+                <div class="report-icon bg-indigo">
+                    <i class="fa fa-database"></i>
+                </div>
+                <h4>Database Report</h4>
+                <p>Database performance and usage statistics</p>
+                <div class="report-meta">
+                    <span><i class="fa fa-calendar"></i> Weekly</span>
+                    <span><i class="fa fa-file-excel"></i> Excel</span>
+                </div>
+                <div class="report-schedule">
+                    <small><i class="fa fa-clock"></i> Next: Sunday at 2:00 AM</small>
+                </div>
+                <button class="btn-primary-sm"><i class="fa fa-play"></i> Generate Now</button>
+            </div>
+        </div>
+
+        <!-- Recent Reports -->
+        <div class="panel">
+            <div class="panel-header">
+                <h3><i class="fa fa-history"></i> Recently Generated Reports</h3>
+                <div class="panel-actions">
+                    <select class="form-select-sm">
+                        <option>All Types</option>
+                        <option>User Activity</option>
+                        <option>Revenue</option>
+                        <option>Performance</option>
+                        <option>Projects</option>
+                    </select>
+                    <select class="form-select-sm">
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days</option>
+                        <option>Last 90 Days</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Report Name</th>
+                            <th>Type</th>
+                            <th>Generated By</th>
+                            <th>Date & Time</th>
+                            <th>Format</th>
+                            <th>Size</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>June 2026 User Activity Analytics</strong></td>
+                            <td><span class="badge badge-blue">User Activity</span></td>
+                            <td>Vivek Kumar</td>
+                            <td>Jun 11, 2026 09:45 AM</td>
+                            <td><span class="format-badge pdf">PDF</span></td>
+                            <td>2.4 MB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q2 2026 Revenue Analysis Report</strong></td>
+                            <td><span class="badge badge-green">Revenue</span></td>
+                            <td>System Auto</td>
+                            <td>Jun 10, 2026 11:30 PM</td>
+                            <td><span class="format-badge excel">XLSX</span></td>
+                            <td>3.8 MB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Weekly System Performance - Week 23</strong></td>
+                            <td><span class="badge badge-purple">Performance</span></td>
+                            <td>System Auto</td>
+                            <td>Jun 10, 2026 08:00 AM</td>
+                            <td><span class="format-badge pdf">PDF</span></td>
+                            <td>1.2 MB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Active Projects Status Summary</strong></td>
+                            <td><span class="badge badge-orange">Projects</span></td>
+                            <td>Vivek Kumar</td>
+                            <td>Jun 09, 2026 03:20 PM</td>
+                            <td><span class="format-badge csv">CSV</span></td>
+                            <td>524 KB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Daily Error & Bug Tracking - Jun 09</strong></td>
+                            <td><span class="badge badge-red">Error Report</span></td>
+                            <td>System Auto</td>
+                            <td>Jun 09, 2026 06:00 AM</td>
+                            <td><span class="format-badge pdf">PDF</span></td>
+                            <td>856 KB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database Performance Metrics - Week 22</strong></td>
+                            <td><span class="badge badge-indigo">Database</span></td>
+                            <td>System Auto</td>
+                            <td>Jun 08, 2026 02:00 AM</td>
+                            <td><span class="format-badge excel">XLSX</span></td>
+                            <td>2.1 MB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monthly User Engagement - May 2026</strong></td>
+                            <td><span class="badge badge-blue">User Activity</span></td>
+                            <td>Vivek Kumar</td>
+                            <td>Jun 01, 2026 10:15 AM</td>
+                            <td><span class="format-badge pdf">PDF</span></td>
+                            <td>3.2 MB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>API Usage & Performance Report</strong></td>
+                            <td><span class="badge badge-purple">Performance</span></td>
+                            <td>Admin System</td>
+                            <td>May 30, 2026 11:45 PM</td>
+                            <td><span class="format-badge csv">CSV</span></td>
+                            <td>1.5 MB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security Audit Report - Q2 2026</strong></td>
+                            <td><span class="badge badge-red">Security</span></td>
+                            <td>Vivek Kumar</td>
+                            <td>May 28, 2026 04:30 PM</td>
+                            <td><span class="format-badge pdf">PDF</span></td>
+                            <td>4.7 MB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Client Billing Summary - May 2026</strong></td>
+                            <td><span class="badge badge-green">Revenue</span></td>
+                            <td>System Auto</td>
+                            <td>May 25, 2026 09:00 AM</td>
+                            <td><span class="format-badge excel">XLSX</span></td>
+                            <td>2.9 MB</td>
+                            <td><span class="status-badge success">Ready</span></td>
+                            <td>
+                                <button class="icon-btn-sm" title="Download"><i class="fa fa-download"></i></button>
+                                <button class="icon-btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                <button class="icon-btn-sm" title="Share"><i class="fa fa-share"></i></button>
+                                <button class="icon-btn-sm" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-footer">
+                <div>Showing 1 to 10 of 247 reports</div>
+                <div class="pagination">
+                    <button class="btn-pagination" disabled><i class="fa fa-chevron-left"></i></button>
+                    <button class="btn-pagination active">1</button>
+                    <button class="btn-pagination">2</button>
+                    <button class="btn-pagination">3</button>
+                    <button class="btn-pagination">...</button>
+                    <button class="btn-pagination">25</button>
+                    <button class="btn-pagination"><i class="fa fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== PROFILE VIEW ==================== -->
+    <div id="profile-view" class="content-view" style="display: none;">
+
+        <div class="page-header">
+            <div>
+                <h1>Admin Profile</h1>
+                <p>Manage your account settings and preferences.</p>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="panel span-2">
+                <div class="panel-header">
+                    <h3><i class="fa fa-user"></i> Personal Information</h3>
+                </div>
+                <form class="profile-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" class="form-input" value="Vivek Kumar" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-input" value="vivek@stackly.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-input" value="+91 9108765432" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Position</label>
+                            <input type="text" class="form-input" value="System Administrator" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <textarea class="form-input" rows="3">Experienced system administrator with 10+ years in IT management.</textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Update Profile</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-camera"></i> Profile Picture</h3>
+                </div>
+                <div class="profile-picture">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="Profile">
+                    <button class="btn-secondary">Change Picture</button>
+                    <p class="text-small">JPG, PNG or GIF. Max size 2MB</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-lock"></i> Change Password</h3>
+                </div>
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" class="form-input" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Update Password</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-history"></i> Account Activity</h3>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item-simple">
+                        <i class="fa fa-sign-in-alt text-success"></i>
+                        <div>
+                            <strong>Last Login</strong>
+                            <p>Today at 9:30 AM from 192.168.1.1</p>
+                        </div>
+                    </div>
+                    <div class="activity-item-simple">
+                        <i class="fa fa-key text-warning"></i>
+                        <div>
+                            <strong>Password Changed</strong>
+                            <p>2 weeks ago</p>
+                        </div>
+                    </div>
+                    <div class="activity-item-simple">
+                        <i class="fa fa-edit text-info"></i>
+                        <div>
+                            <strong>Profile Updated</strong>
+                            <p>1 month ago</p>
+                        </div>
+                    </div>
+                    <div class="activity-item-simple">
+                        <i class="fa fa-calendar text-primary"></i>
+                        <div>
+                            <strong>Account Created</strong>
+                            <p>January 15, 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== SETTINGS VIEW ==================== -->
+    <div id="settings-view" class="content-view" style="display: none;">
+
+        <div class="page-header">
+            <div>
+                <h1>Settings</h1>
+                <p>Configure system preferences and options.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary"><i class="fa fa-undo"></i> Reset to Default</button>
+                <button class="btn-primary"><i class="fa fa-save"></i> Save All Changes</button>
+            </div>
+        </div>
+
+        <div class="settings-grid">
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-cog"></i> General Settings</h3>
+                </div>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label>Site Name</label>
+                        <input type="text" class="form-input" value="Stackly Admin Portal" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Site URL</label>
+                        <input type="url" class="form-input" value="https://admin.stackly.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Admin Email</label>
+                        <input type="email" class="form-input" value="admin@stackly.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Timezone</label>
+                        <select class="form-input" required>
+                            <option>UTC +5:30 (IST)</option>
+                            <option>UTC +0:00 (GMT)</option>
+                            <option>UTC -5:00 (EST)</option>
+                            <option>UTC -8:00 (PST)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Language</label>
+                        <select class="form-input" required>
+                            <option>English</option>
+                            <option>Spanish</option>
+                            <option>French</option>
+                            <option>German</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-bell"></i> Notification Preferences</h3>
+                </div>
+                <div class="settings-toggles">
+                    <div class="toggle-item">
+                        <div>
+                            <strong>Email Notifications</strong>
+                            <p>Receive notifications via email</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div>
+                            <strong>SMS Alerts</strong>
+                            <p>Get important alerts via SMS</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div>
+                            <strong>Push Notifications</strong>
+                            <p>Browser push notifications</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div>
+                            <strong>Weekly Reports</strong>
+                            <p>Receive weekly activity summary</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div>
+                            <strong>Security Alerts</strong>
+                            <p>Critical security notifications</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-shield-alt"></i> Security Settings</h3>
+                </div>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label>Two-Factor Authentication</label>
+                        <select class="form-input" required>
+                            <option>Enabled</option>
+                            <option>Disabled</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Session Timeout (minutes)</label>
+                        <input type="number" class="form-input" value="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password Expiry (days)</label>
+                        <input type="number" class="form-input" value="90" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Allowed IP Addresses</label>
+                        <textarea class="form-input" rows="3" placeholder="Enter IP addresses, one per line"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-database"></i> Backup & Maintenance</h3>
+                </div>
+                <div class="backup-info">
+                    <div class="info-row">
+                        <span>Last Backup:</span>
+                        <strong>Today at 2:00 AM</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Next Scheduled:</span>
+                        <strong>Tomorrow at 2:00 AM</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Backup Location:</span>
+                        <strong>Cloud Storage</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Storage Used:</span>
+                        <strong>450 GB / 600 GB</strong>
+                    </div>
+                </div>
+                <div class="backup-actions">
+                    <button class="btn-primary">
+                        <i class="fa fa-play"></i> Run Backup Now
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fa fa-history"></i> View Backup History
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fa fa-download"></i> Download Backup
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-paint-brush"></i> Appearance</h3>
+                </div>
+                <div class="settings-toggles">
+                    <div class="toggle-item">
+                        <div>
+                            <strong>Dark Mode</strong>
+                            <p>Use dark theme interface</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div>
+                            <strong>Compact Mode</strong>
+                            <p>Reduce spacing and padding</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Primary Color</label>
+                    <div class="color-picker">
+                        <input type="color" value="#667eea">
+                        <span>#667eea</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3><i class="fa fa-envelope"></i> Email Configuration</h3>
+                </div>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label>SMTP Server</label>
+                        <input type="text" class="form-input" value="smtp.stackly.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>SMTP Port</label>
+                        <input type="number" class="form-input" value="587" required>
+                    </div>
+                    <div class="form-group">
+                        <label>SMTP Username</label>
+                        <input type="text" class="form-input" value="admin@stackly.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>SMTP Password</label>
+                        <input type="password" class="form-input" value="********" required>
+                    </div>
+                    <button type="button" class="btn-secondary">
+                        <i class="fa fa-paper-plane"></i> Send Test Email
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
 
 </main>
+
+<!-- Modals -->
+<div id="addUserModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add New User</h3>
+            <button class="modal-close" onclick="document.getElementById('addUserModal').style.display='none'">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <form class="modal-form">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" class="form-input" placeholder="Enter full name" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" class="form-input" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <select class="form-input" required>
+                    <option value="">Select Role</option>
+                    <option>Admin</option>
+                    <option>Manager</option>
+                    <option>Developer</option>
+                    <option>User</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-input" placeholder="Enter password" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="document.getElementById('addUserModal').style.display='none'">Cancel</button>
+                <button type="submit" class="btn-primary">Add User</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="createProjectModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Create New Project</h3>
+            <button class="modal-close" onclick="document.getElementById('createProjectModal').style.display='none'">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <form class="modal-form">
+            <div class="form-group">
+                <label>Project Name</label>
+                <input type="text" class="form-input" placeholder="Enter project name" required>
+            </div>
+            <div class="form-group">
+                <label>Client Name</label>
+                <input type="text" class="form-input" placeholder="Enter client name" required>
+            </div>
+            <div class="form-group">
+                <label>Deadline</label>
+                <input type="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-input" rows="3" placeholder="Enter project description"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="document.getElementById('createProjectModal').style.display='none'">Cancel</button>
+                <button type="submit" class="btn-primary">Create Project</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="js/dashboard.js"></script>
 <script>
-// Initialize Charts for Admin Dashboard
+// Set active menu item
+function setActive(element) {
+    document.querySelectorAll('.sidebar ul li').forEach(li => li.classList.remove('active'));
+    element.parentElement.classList.add('active');
+
+    // Update breadcrumb
+    const breadcrumb = document.getElementById('breadcrumb');
+    const sectionName = element.textContent.trim();
+    breadcrumb.textContent = sectionName;
+}
+
+// Mobile Search Functionality
+const mobileSearchToggle = document.getElementById('mobileSearchToggle');
+const mobileSearchBar = document.getElementById('mobileSearchBar');
+const closeMobileSearch = document.getElementById('closeMobileSearch');
+const mobileSearchInput = document.getElementById('mobileSearchInput');
+
+if (mobileSearchToggle) {
+    mobileSearchToggle.addEventListener('click', function() {
+        mobileSearchBar.classList.add('active');
+        setTimeout(() => {
+            mobileSearchInput.focus();
+        }, 300);
+    });
+}
+
+if (closeMobileSearch) {
+    closeMobileSearch.addEventListener('click', function() {
+        mobileSearchBar.classList.remove('active');
+        mobileSearchInput.value = '';
+    });
+}
+
+// Close mobile search on escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileSearchBar.classList.contains('active')) {
+        mobileSearchBar.classList.remove('active');
+        mobileSearchInput.value = '';
+    }
+});
+
+// Initialize Charts
 document.addEventListener('DOMContentLoaded', function() {
 
     // Main Dashboard Chart
-    const chartCanvas = document.getElementById('chart');
-    if (chartCanvas) {
-        new Chart(chartCanvas, {
+    const mainChart = document.getElementById('mainChart');
+    if (mainChart) {
+        new Chart(mainChart, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
@@ -424,9 +2045,27 @@ document.addEventListener('DOMContentLoaded', function() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: true }
-                }
+                plugins: { legend: { display: true } }
+            }
+        });
+    }
+
+    // Project Chart
+    const projectChart = document.getElementById('projectChart');
+    if (projectChart) {
+        new Chart(projectChart, {
+            type: 'doughnut',
+            data: {
+                labels: ['In Progress', 'Completed', 'On Hold'],
+                datasets: [{
+                    data: [28, 12, 2],
+                    backgroundColor: ['#667eea', '#22c55e', '#f59e0b']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
             }
         });
     }
@@ -448,9 +2087,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: true }
-                }
+                plugins: { legend: { display: true } }
             }
         });
     }
@@ -464,11 +2101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: ['Desktop', 'Mobile', 'Tablet'],
                 datasets: [{
                     data: [45, 35, 20],
-                    backgroundColor: [
-                        'rgba(102, 126, 234, 0.8)',
-                        'rgba(118, 75, 162, 0.8)',
-                        'rgba(237, 100, 166, 0.8)'
-                    ]
+                    backgroundColor: ['#667eea', '#764ba2', '#ed64a6']
                 }]
             },
             options: {
@@ -484,6 +2117,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+}
 </script>
+
 </body>
 </html>
