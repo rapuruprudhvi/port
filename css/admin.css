@@ -2176,6 +2176,62 @@ td:last-child {
     }
 }
 
+/* Very Small Mobile Screens - Extra Optimizations */
+@media (max-width: 360px) {
+    .topbar {
+        padding: 8px 10px;
+    }
+
+    .topbar-left {
+        gap: 6px;
+    }
+
+    .topbar-right {
+        gap: 6px;
+    }
+
+    .menu-btn {
+        width: 36px;
+        height: 36px;
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .breadcrumb-nav {
+        padding: 4px 8px;
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    .breadcrumb-nav span {
+        max-width: 80px;
+    }
+
+    .icon-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .icon-btn .badge {
+        font-size: 8px;
+        padding: 1px 3px;
+        min-width: 14px;
+        top: -4px;
+        right: -4px;
+    }
+
+    .user-menu {
+        padding: 2px;
+    }
+
+    .user-menu img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
 /* Grid Layout Responsive Styles */
 .grid-2 {
     display: grid;

@@ -53,6 +53,7 @@ body {
 .header-left {
     display: flex;
     align-items: center;
+    gap: 24px;
 }
 
 .logo {
@@ -71,9 +72,25 @@ body {
 }
 
 .logo img {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     object-fit: contain;
+}
+
+.header-welcome {
+    display: flex;
+    align-items: center;
+}
+
+.welcome-text {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.welcome-text strong {
+    color: var(--accent);
+    font-weight: 600;
 }
 
 .header-right {
@@ -428,11 +445,38 @@ body {
 
 @media (max-width: 768px) {
     .header {
-        padding: 1rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .header-left {
+        gap: 12px;
+    }
+
+    .header-right {
+        gap: 0.75rem;
+    }
+
+    .logo img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .header-welcome {
+        display: none;
     }
 
     .user-info {
         display: none;
+    }
+
+    .user-avatar {
+        width: 38px;
+        height: 38px;
+    }
+
+    .btn-logout {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
     }
 
     .container {
@@ -461,11 +505,71 @@ body {
 }
 
 @media (max-width: 480px) {
+    .header {
+        padding: 0.6rem 0.75rem;
+    }
+
+    .header-left {
+        gap: 8px;
+    }
+
+    .header-right {
+        gap: 0.5rem;
+    }
+
+    .logo img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+    .btn-logout {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+    }
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
 
     .logo span {
         display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .header {
+        padding: 0.5rem;
+    }
+
+    .header-left {
+        gap: 6px;
+    }
+
+    .header-right {
+        gap: 0.4rem;
+    }
+
+    .logo img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .btn-logout {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .btn-logout i {
+        font-size: 0.85rem;
     }
 }

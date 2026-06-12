@@ -64,6 +64,7 @@ body {
     padding: 0 20px 30px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     text-align: center;
+    position: relative;
 }
 
 .sidebar-header a {
@@ -74,6 +75,29 @@ body {
 .sidebar-header a:hover {
     transform: scale(1.05);
     opacity: 0.8;
+}
+
+.sidebar-close {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: rgba(239, 68, 68, 0.1);
+    border: none;
+    color: #ef4444;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-close:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: scale(1.05);
 }
 
 .sidebar-logo {
@@ -342,11 +366,23 @@ body {
 }
 
 .close-btn {
-    background: none;
+    background: rgba(239, 68, 68, 0.1);
     border: none;
-    color: var(--text);
+    color: #ef4444;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
     font-size: 24px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: scale(1.05);
 }
 
 .notification-list {
@@ -898,6 +934,10 @@ body {
         transform: translateX(0);
     }
 
+    .sidebar-close {
+        display: flex;
+    }
+
     .main-content {
         margin-left: 0;
     }
@@ -964,11 +1004,31 @@ body {
 
 @media (max-width: 480px) {
     .top-navbar {
-        padding: 15px;
+        padding: 12px 15px;
+    }
+
+    .navbar-left {
+        gap: 12px;
     }
 
     .navbar-right {
-        gap: 10px;
+        gap: 8px;
+    }
+
+    .page-title {
+        font-size: 1rem;
+    }
+
+    .notification-btn,
+    .dark-mode-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .user-profile img {
+        width: 36px;
+        height: 36px;
     }
 
     .stat-card {
@@ -983,6 +1043,44 @@ body {
 
     .stat-info h3 {
         font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .top-navbar {
+        padding: 10px 12px;
+    }
+
+    .navbar-left {
+        gap: 8px;
+    }
+
+    .navbar-right {
+        gap: 6px;
+    }
+
+    .page-title {
+        font-size: 0.9rem;
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .notification-btn,
+    .dark-mode-toggle {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .user-profile img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .menu-toggle {
+        font-size: 20px;
     }
 }
 

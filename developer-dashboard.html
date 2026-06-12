@@ -21,8 +21,11 @@
         <div class="header-left">
             <a href="index.html" class="logo">
                 <img src="image/logo-stackly.png" alt="Stackly Logo">
-              
+
             </a>
+            <div class="header-welcome">
+                <span class="welcome-text">Welcome back, <strong id="headerUserName">Developer</strong>!</span>
+            </div>
         </div>
 
         <div class="header-right">
@@ -275,6 +278,7 @@
                     // Update header
                     document.getElementById('userName').textContent = fullName;
                     document.getElementById('userEmail').textContent = email;
+                    document.getElementById('headerUserName').textContent = fullName;
 
                     // Update welcome
                     const firstName = fullName.split(' ')[0];
@@ -291,6 +295,7 @@
                     const emailName = email.split('@')[0];
                     const displayName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
                     document.getElementById('userName').textContent = displayName;
+                    document.getElementById('headerUserName').textContent = displayName;
                     document.getElementById('welcomeName').textContent = displayName;
 
                     const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff`;

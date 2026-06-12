@@ -146,8 +146,8 @@ body::after {
 }
 
 .logo-wrapper img {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.3));
     transition: all 0.3s ease;
@@ -205,19 +205,40 @@ form {
     border-radius: 12px;
     padding: 0 16px;
     font-size: 0.95rem;
-    color: var(--text-primary);
+    color: #ffffff;
+    font-weight: 400;
     transition: all 0.3s ease;
     outline: none;
+    -webkit-text-fill-color: #ffffff;
 }
 
 .custom-input:focus {
     background: var(--input-focus);
     border-color: var(--accent);
     box-shadow: 0 0 0 4px var(--accent-light);
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
 }
 
 .custom-input::placeholder {
     color: var(--text-muted);
+}
+
+/* Prevent autofill white background */
+.custom-input:-webkit-autofill,
+.custom-input:-webkit-autofill:hover,
+.custom-input:-webkit-autofill:focus,
+.custom-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+    background-color: var(--input-bg) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.custom-input:-webkit-autofill::first-line {
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
 }
 
 /* Select Dropdown */
@@ -228,11 +249,13 @@ select.custom-input {
     background-repeat: no-repeat;
     background-position: right 16px center;
     padding-right: 40px;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
 }
 
 select.custom-input option {
     background: var(--card-bg);
-    color: var(--text-primary);
+    color: #ffffff;
     padding: 12px;
 }
 

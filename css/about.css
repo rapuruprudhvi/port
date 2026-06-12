@@ -344,7 +344,19 @@
 
     .about-hero-section {
 
-        padding-top: 120px;
+        padding-top: 100px;
+
+        min-height: auto;
+
+        padding-bottom: 60px;
+
+    }
+
+    .about-hero-section::before {
+
+        width: 300px;
+
+        height: 300px;
 
     }
 
@@ -354,13 +366,108 @@
 
     }
 
+    .company-story-section,
+    .mission-vision-section,
+    .core-values-section,
+    .process-section,
+    .team-preview-section {
+
+        padding: 60px 0;
+
+    }
+
 }
 
 @media (max-width: 576px) {
 
+    .about-hero-section {
+
+        padding-top: 80px;
+
+        padding-bottom: 50px;
+
+    }
+
     .core-values-section .why-card h3 {
 
-        font-size: 2.3rem;
+        font-size: 2rem;
+
+    }
+
+    .process-section .service-card {
+
+        padding: 20px;
+
+    }
+
+    .company-story-section,
+    .mission-vision-section,
+    .core-values-section,
+    .process-section,
+    .team-preview-section {
+
+        padding: 50px 0;
+
+    }
+
+    .about-hero-section .hero-image-wrapper {
+
+        margin-top: 40px;
+
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .about-hero-section {
+
+        padding-top: 70px;
+
+        padding-bottom: 40px;
+
+    }
+
+    .about-hero-section::before {
+
+        width: 250px;
+
+        height: 250px;
+
+    }
+
+    .core-values-section .why-card h3 {
+
+        font-size: 1.8rem;
+
+    }
+
+    .process-section .service-card {
+
+        padding: 18px;
+
+    }
+
+    .company-story-section,
+    .mission-vision-section,
+    .core-values-section,
+    .process-section,
+    .team-preview-section {
+
+        padding: 40px 0;
+
+    }
+
+    .about-hero-section .hero-image-wrapper {
+
+        margin-top: 30px;
+
+    }
+
+    .company-story-section .row,
+    .team-preview-section .row {
+
+        gap: 30px;
 
     }
 
