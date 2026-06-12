@@ -47,6 +47,7 @@
                         class="custom-input"
                         placeholder="Enter your full name"
                         required>
+                    <span class="error-message" id="fullnameError"></span>
                 </div>
 
                 <div class="mb-3">
@@ -70,6 +71,7 @@
                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                         title="Please enter a valid email address (e.g., user@example.com)"
                         required>
+                    <span class="error-message" id="signupEmailError"></span>
                 </div>
 
                 <div class="mb-3">
@@ -84,6 +86,7 @@
                             required>
                         <i class="fa-solid fa-eye eye-icon" data-target="signupPassword"></i>
                     </div>
+                    <span class="error-message" id="signupPasswordError"></span>
                 </div>
 
                 <div class="mb-3">
@@ -98,6 +101,7 @@
                             required>
                         <i class="fa-solid fa-eye eye-icon" data-target="confirmPassword"></i>
                     </div>
+                    <span class="error-message" id="confirmPasswordError"></span>
                 </div>
 
                 <button type="submit" class="signup-btn">
@@ -148,40 +152,54 @@
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
+            // Clear previous error messages
+            document.getElementById('fullnameError').textContent = '';
+            document.getElementById('signupEmailError').textContent = '';
+            document.getElementById('signupPasswordError').textContent = '';
+            document.getElementById('confirmPasswordError').textContent = '';
+
             const fullname = document.getElementById('fullname').value;
             const role = document.getElementById('userRole').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
 
-            // Validate role selection
-            if (!role) {
-                alert('Please select your role!');
+            // Validate fullname (alphabets only)
+            const namePattern = /^[a-zA-Z\s]+$/;
+            if (!namePattern.test(fullname)) {
+                document.getElementById('fullnameError').textContent = 'Name contains only alphabets';
                 return;
             }
 
             // Email validation with proper domain
             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailPattern.test(email)) {
-                alert('Please enter a valid email address with a proper domain (e.g., .com, .co, .org)');
+                document.getElementById('signupEmailError').textContent = 'Please enter a valid email address';
+                return;
+            }
+
+            // Password length validation
+            if (password.length < 6) {
+                document.getElementById('signupPasswordError').textContent = 'Password must be at least 6 characters';
                 return;
             }
 
             // Validate password match
             if (password !== confirmPassword) {
-                alert('Passwords do not match!');
+                document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
                 return;
             }
 
-            // Store user data in localStorage (for demo purposes)
+            // Store user data in localStorage (for demo purposes only - not secure for production)
             const userData = {
                 fullname: fullname,
                 role: role,
-                email: email
+                email: email,
+                password: password  // Storing password for demo validation
             };
             localStorage.setItem('userData', JSON.stringify(userData));
 
-            alert('Account created successfully as ' + role + '!');
+            // Redirect without success alert
             window.location.href = 'login.html';
         });
     </script>

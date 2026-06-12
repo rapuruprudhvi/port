@@ -214,6 +214,18 @@ body {
     cursor: pointer;
 }
 
+.admin-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+}
+
+.admin-logo:hover {
+    transform: scale(1.05);
+}
+
 .brand span {
     font-size: 11px;
     color: var(--text-light);

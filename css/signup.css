@@ -374,10 +374,13 @@ select.custom-input option {
     }
 
     .back-home {
-        top: 20px;
-        left: 20px;
-        font-size: 0.9rem;
-        padding: 8px 14px;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        font-size: 0.85rem;
+        padding: 8px 12px;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
     }
 
     .signup-card {
@@ -454,4 +457,18 @@ select.custom-input option {
     .google-btn {
         height: 46px;
     }
+}
+
+/* Error Messages */
+.error-message {
+    display: block;
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    min-height: 20px;
+    transition: all 0.3s ease;
+}
+
+.error-message:empty {
+    display: none;
 }

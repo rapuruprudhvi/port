@@ -20,8 +20,8 @@
         <i class="fa fa-times"></i>
     </button>
     <div class="brand">
-        <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer;">
-            <h3>STACKLY</h3>
+        <a href="index.html" style="text-decoration: none; cursor: pointer; display: block;">
+            <img src="image/logo-stackly.png" alt="Stackly Logo" class="admin-logo">
         </a>
         <span>Admin Portal</span>
         <div class="online-status">
@@ -2167,6 +2167,9 @@ function loadAdminInfo() {
             const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff`;
             document.getElementById('adminAvatar').src = avatarUrl;
         }
+    } else {
+        // No session found, redirect to login
+        window.location.href = 'login.html';
     }
 }
 

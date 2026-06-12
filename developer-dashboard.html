@@ -32,7 +32,7 @@
             </div>
             <img id="userAvatar" src="https://ui-avatars.com/api/?name=Developer&background=6366f1&color=fff"
                  alt="Profile" class="user-avatar">
-            <a href="login.html" class="btn-logout">
+            <a href="#" id="logoutBtn" class="btn-logout">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         </div>
@@ -296,11 +296,27 @@
                     const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff`;
                     document.getElementById('userAvatar').src = avatarUrl;
                 }
+            } else {
+                // No session found, redirect to login
+                window.location.href = 'login.html';
             }
         }
 
         // Load on page load
         loadDeveloperInfo();
+
+        // Logout functionality
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Clear session data
+                localStorage.removeItem('loginSession');
+                sessionStorage.removeItem('loginSession');
+                // Redirect to login page
+                window.location.href = 'login.html';
+            });
+        }
     </script>
 
 </body>

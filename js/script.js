@@ -291,18 +291,12 @@ if (contactForm) {
                 !message.value.trim()
             ) {
 
-                alert(
-                    "Please fill all fields."
-                );
-
+                // HTML5 validation will handle this
                 return;
 
             }
 
-            alert(
-                "✓ Message Sent Successfully!\n\nThank you for contacting Stackly."
-            );
-
+            // Message sent - reset form silently
             contactForm.reset();
 
         }

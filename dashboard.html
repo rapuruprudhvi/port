@@ -98,13 +98,17 @@
                 </a>
             </li>
 
+            <li class="menu-item">
+                <a href="#" id="logoutBtn">
+                    <i class="bi bi-box-arrow-left"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+
         </ul>
 
         <div class="sidebar-footer">
-            <a href="login.html" class="logout-btn">
-                <i class="bi bi-box-arrow-left"></i>
-                <span>Logout</span>
-            </a>
+            <!-- Logout moved to menu items -->
         </div>
 
     </div>
@@ -1187,6 +1191,9 @@
                     const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=2563eb&color=fff`;
                     document.getElementById('userAvatar').src = avatarUrl;
                 }
+            } else {
+                // No session found, redirect to login
+                window.location.href = 'login.html';
             }
         }
 

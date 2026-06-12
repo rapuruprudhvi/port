@@ -224,10 +224,9 @@ actionBoxes.forEach((box) => {
 
     box.addEventListener("click", () => {
 
-        const action =
-            box.querySelector("span").innerText;
-
-        alert(action + " Clicked");
+        // Action click - no notification needed
+        const action = box.querySelector("span").innerText;
+        // Perform action silently
 
     });
 
@@ -244,16 +243,8 @@ deleteButtons.forEach((btn) => {
 
     btn.addEventListener("click", () => {
 
-        const confirmDelete =
-            confirm(
-                "Are you sure you want to delete this user?"
-            );
-
-        if (confirmDelete) {
-
-            btn.closest("tr").remove();
-
-        }
+        // Delete user without confirmation
+        btn.closest("tr").remove();
 
     });
 
@@ -300,7 +291,9 @@ const logoutBtn =
 
 if (logoutBtn) {
 
-    logoutBtn.addEventListener("click", () => {
+    logoutBtn.addEventListener("click", (e) => {
+
+        e.preventDefault(); // Prevent default anchor behavior
 
         // Clear session data
         localStorage.removeItem('loginSession');
